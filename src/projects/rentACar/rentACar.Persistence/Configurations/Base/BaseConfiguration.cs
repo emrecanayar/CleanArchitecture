@@ -13,7 +13,7 @@ namespace rentACar.Persistence.Configurations.Base
 {
     public abstract class BaseConfiguration<T> : IEntityTypeConfiguration<T> where T : Entity
     {
-        public void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("Id").UseIdentityColumn();
