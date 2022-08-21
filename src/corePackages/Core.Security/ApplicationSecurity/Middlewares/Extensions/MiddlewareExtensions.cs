@@ -14,5 +14,9 @@ namespace Core.Security.ApplicationSecurity.Middlewares.Extensions
         {
             return builder.UseMiddleware<IpSafeMiddleware>();
         }
+        public static IApplicationBuilder UseCustomHttpContextHashingMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<CustomHttpContextHashingMiddleware>();
+        }
     }
 }
