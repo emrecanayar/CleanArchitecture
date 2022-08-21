@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Otp.NET" Version="1.2.2" />
+  </ItemGroup>
+
 </Project>
