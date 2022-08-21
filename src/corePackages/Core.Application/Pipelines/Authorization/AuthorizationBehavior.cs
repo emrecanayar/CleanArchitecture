@@ -16,7 +16,7 @@ namespace Core.Application.Pipelines.Authorization
         }
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            List<string> roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+            List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
             if (roleClaims == null) throw new AuthorizationException("Claims not found.");
 
