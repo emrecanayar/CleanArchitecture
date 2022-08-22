@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
   </ItemGroup>
 
