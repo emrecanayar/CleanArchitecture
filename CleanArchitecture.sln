@@ -11,41 +11,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "corePackages", "corePackage
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{210E1EE8-9409-4CD8-B338-80759AEF7301}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "src\corePackages\Core.Application\Core.Application.csproj", "{9558AFBF-8EA1-4DB1-9434-D9926A30ABE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\corePackages\Core.Application\Core.Application.csproj", "{9558AFBF-8EA1-4DB1-9434-D9926A30ABE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.CrossCuttingConcerns", "src\corePackages\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj", "{50BD695B-355E-4B7E-91CC-2123C093BB11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.CrossCuttingConcerns", "src\corePackages\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj", "{50BD695B-355E-4B7E-91CC-2123C093BB11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.ElasticSearch", "src\corePackages\Core.ElasticSearch\Core.ElasticSearch.csproj", "{B6E67273-E560-4484-A847-182CF0D8DF20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ElasticSearch", "src\corePackages\Core.ElasticSearch\Core.ElasticSearch.csproj", "{B6E67273-E560-4484-A847-182CF0D8DF20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Mailing", "src\corePackages\Core.Mailing\Core.Mailing.csproj", "{574C2CAC-FD87-49B0-B468-3E4A336EE5EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Mailing", "src\corePackages\Core.Mailing\Core.Mailing.csproj", "{574C2CAC-FD87-49B0-B468-3E4A336EE5EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence", "src\corePackages\Core.Persistence\Core.Persistence.csproj", "{1C054426-FACB-4F5A-ADB4-3FC2B6363726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "src\corePackages\Core.Persistence\Core.Persistence.csproj", "{1C054426-FACB-4F5A-ADB4-3FC2B6363726}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Security", "src\corePackages\Core.Security\Core.Security.csproj", "{153CD5C8-831F-47F7-B9E3-CA6131EA39DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Security", "src\corePackages\Core.Security\Core.Security.csproj", "{153CD5C8-831F-47F7-B9E3-CA6131EA39DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rentACar", "rentACar", "{83CF0737-A1BE-4E29-836C-111797C4137F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "northwind", "northwind", "{0B6B7DEB-2005-4472-AF77-424D6488CF66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rentACar.Application", "src\projects\rentACar\rentACar.Application\rentACar.Application.csproj", "{F4FA8077-FD7D-4ED2-B7C2-66EAB6E151D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rentACar.Application", "src\projects\rentACar\rentACar.Application\rentACar.Application.csproj", "{F4FA8077-FD7D-4ED2-B7C2-66EAB6E151D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rentACar.Domain", "src\projects\rentACar\rentACar.Domain\rentACar.Domain.csproj", "{1C48F66B-DBCA-4508-A11C-88D3263A9E64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rentACar.Domain", "src\projects\rentACar\rentACar.Domain\rentACar.Domain.csproj", "{1C48F66B-DBCA-4508-A11C-88D3263A9E64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rentACar.Infrastructure", "src\projects\rentACar\rentACar.Infrastructure\rentACar.Infrastructure.csproj", "{D6913A90-DEC6-4A5B-B877-1BB43E0A6B8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rentACar.Infrastructure", "src\projects\rentACar\rentACar.Infrastructure\rentACar.Infrastructure.csproj", "{D6913A90-DEC6-4A5B-B877-1BB43E0A6B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rentACar.Persistence", "src\projects\rentACar\rentACar.Persistence\rentACar.Persistence.csproj", "{6B646C19-C58C-420C-B3F9-76ACA5774BF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rentACar.Persistence", "src\projects\rentACar\rentACar.Persistence\rentACar.Persistence.csproj", "{6B646C19-C58C-420C-B3F9-76ACA5774BF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rentACar.WebAPI", "src\projects\rentACar\rentACar.WebAPI\rentACar.WebAPI.csproj", "{5AC6200E-DEDE-4B13-939D-4013B83C1C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rentACar.WebAPI", "src\projects\rentACar\rentACar.WebAPI\rentACar.WebAPI.csproj", "{5AC6200E-DEDE-4B13-939D-4013B83C1C50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.Application", "src\projects\northwind\northwind.Application\northwind.Application.csproj", "{F56F92A4-D03F-4A4F-8C34-6AD9E48DFC82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "northwind.Application", "src\projects\northwind\northwind.Application\northwind.Application.csproj", "{F56F92A4-D03F-4A4F-8C34-6AD9E48DFC82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.Domain", "src\projects\northwind\northwind.Domain\northwind.Domain.csproj", "{A5E1DC2C-1423-4FF3-A4C2-69CB452D503B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "northwind.Domain", "src\projects\northwind\northwind.Domain\northwind.Domain.csproj", "{A5E1DC2C-1423-4FF3-A4C2-69CB452D503B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.Infrastructure", "src\projects\northwind\northwind.Infrastructure\northwind.Infrastructure.csproj", "{D7BEAE38-6C16-4772-BCC9-5E4F32441A10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "northwind.Infrastructure", "src\projects\northwind\northwind.Infrastructure\northwind.Infrastructure.csproj", "{D7BEAE38-6C16-4772-BCC9-5E4F32441A10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.Persistence", "src\projects\northwind\northwind.Persistence\northwind.Persistence.csproj", "{D05EA9C7-1658-485C-8A47-F9718914BBDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "northwind.Persistence", "src\projects\northwind\northwind.Persistence\northwind.Persistence.csproj", "{D05EA9C7-1658-485C-8A47-F9718914BBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "northwind.WebAPI", "src\projects\northwind\northwind.WebAPI\northwind.WebAPI.csproj", "{D34AE87D-26F4-4041-9122-11BA6F369902}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "northwind.WebAPI", "src\projects\northwind\northwind.WebAPI\northwind.WebAPI.csproj", "{D34AE87D-26F4-4041-9122-11BA6F369902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Integration", "src\corePackages\Core.Integration\Core.Integration\Core.Integration.csproj", "{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{D34AE87D-26F4-4041-9122-11BA6F369902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D34AE87D-26F4-4041-9122-11BA6F369902}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D34AE87D-26F4-4041-9122-11BA6F369902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +148,7 @@ Global
 		{D7BEAE38-6C16-4772-BCC9-5E4F32441A10} = {0B6B7DEB-2005-4472-AF77-424D6488CF66}
 		{D05EA9C7-1658-485C-8A47-F9718914BBDE} = {0B6B7DEB-2005-4472-AF77-424D6488CF66}
 		{D34AE87D-26F4-4041-9122-11BA6F369902} = {0B6B7DEB-2005-4472-AF77-424D6488CF66}
+		{BB9DF5C9-A5AF-4AD9-BCDA-E3D893879777} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B08683-DB84-490D-9E07-E40053E7ECDC}
