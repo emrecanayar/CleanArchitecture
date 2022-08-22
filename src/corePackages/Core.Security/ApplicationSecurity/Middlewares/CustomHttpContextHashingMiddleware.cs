@@ -1,7 +1,9 @@
-﻿using Core.Security.Hashing;
+﻿using Core.CrossCuttingConcerns.Logging.SeriLog;
+using Core.Security.Hashing;
 using Core.Security.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace Core.Security.ApplicationSecurity.Middlewares
@@ -11,11 +13,13 @@ namespace Core.Security.ApplicationSecurity.Middlewares
         private readonly RequestDelegate _next;
         private Stopwatch _stopwatch;
         private readonly CustomHttpContextHashing _securityKey;
+        private readonly LoggerServiceBase _loggerServiceBase;
 
-        public CustomHttpContextHashingMiddleware(RequestDelegate next, IOptions<CustomHttpContextHashing> securityKey)
+        public CustomHttpContextHashingMiddleware(RequestDelegate next, IOptions<CustomHttpContextHashing> securityKey, LoggerServiceBase loggerServiceBase)
         {
             _next = next;
             _securityKey = securityKey.Value;
+            _loggerServiceBase = loggerServiceBase;
         }
 
         public async Task Invoke(HttpContext context)
@@ -82,8 +86,7 @@ namespace Core.Security.ApplicationSecurity.Middlewares
             }
             catch (Exception exception)
             {
-                //Logging information will be added later
-                Console.WriteLine(exception);
+                _loggerServiceBase.Error($"An error occurred in the Hashing Middleware : {exception.Message}");
             }
             finally
             {
@@ -96,11 +99,12 @@ namespace Core.Security.ApplicationSecurity.Middlewares
                 _stopwatch.Stop();
                 api.ElapsedTime = _stopwatch.ElapsedMilliseconds;
 
-                //_logger.LogDebug($"RequestLog:{DateTime.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(0, 10000)}-{api.ElapsedTime}ms", $"{JsonConvert.SerializeObject(api)}");
+                _loggerServiceBase.Debug($"RequestLog:{DateTime.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(0, 10000)}-{api.ElapsedTime}ms =>  {JsonConvert.SerializeObject(api)}");
+
                 return Task.CompletedTask;
             });
 
-            //_logger.LogInformation($"Finished handling request.{_stopwatch.ElapsedMilliseconds}ms");
+            _loggerServiceBase.Info($"Finished handling request.{_stopwatch.ElapsedMilliseconds}ms");
         }
     }
 }
