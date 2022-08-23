@@ -6,7 +6,7 @@ namespace Core.Persistence.Repositories
     {
         public int Id { get; set; }
         public RecordStatu Status { get; set; }
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = "Admin";
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; } = DateTime.Now;
