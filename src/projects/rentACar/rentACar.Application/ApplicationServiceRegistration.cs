@@ -2,6 +2,9 @@
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Validation;
+using Core.Integration.Base;
+using Core.Integration.Dto;
+using Core.Integration.Serialization;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,9 @@ namespace rentACar.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<BrandBusinessRules>();
+            services.AddScoped<ApiSession>();
+            services.AddScoped<IJsonSerializer, JsonSerializer>();
+            services.AddScoped<IBaseRestClient, BaseRestClient>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

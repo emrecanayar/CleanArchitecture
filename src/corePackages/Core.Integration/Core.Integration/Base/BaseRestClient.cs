@@ -10,22 +10,20 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Core.Integration.Serialization;
 
-namespace Core.Integration
+namespace Core.Integration.Base
 {
-    public abstract class BaseRestClient
+    public class BaseRestClient : IBaseRestClient
     {
-        protected readonly ApiSession ApiSession;
+        private readonly ApiSession ApiSession;
         private readonly IJsonSerializer _jsonSerializer;
 
-        public IJsonSerializer JsonSerializer { get; }
-
-        protected BaseRestClient(ApiSession apiSession, IJsonSerializer jsonSerializer)
+        public BaseRestClient(ApiSession apiSession, IJsonSerializer jsonSerializer)
         {
             ApiSession = apiSession;
             _jsonSerializer = jsonSerializer;
         }
 
-        protected Task Post(string url,
+        public Task Post(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -33,8 +31,7 @@ namespace Core.Integration
             return MakeRequest(HttpMethod.Post, url, data, headers, outResponse);
         }
 
-
-        protected async Task<T> Post<T>(string url,
+        public async Task<T> Post<T>(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -43,8 +40,7 @@ namespace Core.Integration
             return await DeserializeOrDefault<T>(result).ConfigureAwait(false);
         }
 
-
-        protected Task Patch(string url,
+        public Task Patch(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -52,7 +48,7 @@ namespace Core.Integration
             return MakeRequest(new HttpMethod("PATCH"), url, data, headers, outResponse);
         }
 
-        protected Task Delete(string url,
+        public Task Delete(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -60,8 +56,7 @@ namespace Core.Integration
             return MakeRequest(HttpMethod.Delete, url, data, headers, outResponse);
         }
 
-
-        protected async Task<T> Delete<T>(string url,
+        public async Task<T> Delete<T>(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -71,7 +66,7 @@ namespace Core.Integration
         }
 
 
-        protected async Task<T> Put<T>(string url,
+        public async Task<T> Put<T>(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -82,7 +77,7 @@ namespace Core.Integration
         }
 
 
-        protected Task Put(string url,
+        public Task Put(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
@@ -91,7 +86,7 @@ namespace Core.Integration
         }
 
 
-        protected async Task<T> Get<T>(string url,
+        public async Task<T> Get<T>(string url,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
         {
@@ -99,7 +94,7 @@ namespace Core.Integration
             return await DeserializeOrDefault<T>(result).ConfigureAwait(false);
         }
 
-        protected Task Get(string url,
+        public Task Get(string url,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> response = null)
         {
@@ -107,7 +102,7 @@ namespace Core.Integration
         }
 
 
-        protected async Task<Stream> GetStream(string url)
+        public async Task<Stream> GetStream(string url)
         {
             using (var client = GetClient())
             {

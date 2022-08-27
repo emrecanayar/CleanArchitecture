@@ -21,8 +21,7 @@ namespace Core.Integration
 
         private static string ToQueryString(this NameValueCollection urlParams)
         {
-            return string.Join("&",
-                urlParams.AllKeys.Distinct().Select(a => a + "=" + urlParams[a]));
+            return string.Join("&", urlParams.AllKeys.Distinct().Select(a => a + "=" + urlParams[a]));
         }
     }
 }
