@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Application.Pipelines.Caching
+namespace Core.Application.Pipelines.Caching.InMemoryCache
 {
-    public interface ICachableRequest
+    public interface ICachableRequestInMemory
     {
         bool BypassCache { get; }
         string CacheKey { get; }

@@ -1,25 +1,21 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Application.Pipelines.Caching
+namespace Core.Application.Pipelines.Caching.InMemoryCache
 {
-    public class CacheRemovingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>, ICacheRemoverRequest
+    public class CacheRemovingBehaviorInMemory<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>, ICacheRemoverRequestInMemory
     {
-        private readonly IDistributedCache _cache;
-        private readonly ILogger<CacheRemovingBehavior<TRequest, TResponse>> _logger;
+        private readonly IMemoryCache _cache;
+        private readonly ILogger<CacheRemovingBehaviorInMemory<TRequest, TResponse>> _logger;
 
-        public CacheRemovingBehavior(IDistributedCache cache, ILogger<CacheRemovingBehavior<TRequest, TResponse>> logger)
+        public CacheRemovingBehaviorInMemory(IMemoryCache cache, ILogger<CacheRemovingBehaviorInMemory<TRequest, TResponse>> logger)
         {
             _cache = cache;
             _logger = logger;
         }
+
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             TResponse response;
@@ -28,7 +24,7 @@ namespace Core.Application.Pipelines.Caching
             async Task<TResponse> GetResponseAndRemoveCache()
             {
                 response = await next();
-                await _cache.RemoveAsync(request.CacheKey, cancellationToken);
+                _cache.Remove(request.CacheKey);
                 return response;
             }
 

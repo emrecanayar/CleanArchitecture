@@ -1,29 +1,28 @@
-﻿using MediatR;
+﻿using Core.Application.Pipelines.Caching.DisturbedCache;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Application.Pipelines.Caching
+namespace Core.Application.Pipelines.Caching.InMemoryCache
 {
-    public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>, ICachableRequest
+    public class CachingBehaviorInMemory<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>, ICachableRequestInMemory
     {
-        private readonly IDistributedCache _cache;
-        private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
+        private readonly IMemoryCache _cache;
+        private readonly ILogger<CachingBehaviorInMemory<TRequest, TResponse>> _logger;
         private readonly CacheSettings _cacheSettings;
 
-        public CachingBehavior(IDistributedCache cache, ILogger<CachingBehavior<TRequest, TResponse>> logger, IConfiguration configuration)
+        public CachingBehaviorInMemory(IMemoryCache cache, ILogger<CachingBehaviorInMemory<TRequest, TResponse>> logger, IConfiguration configuration)
         {
             _cache = cache;
             _logger = logger;
             _cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>();
         }
+
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             TResponse response;
@@ -33,13 +32,13 @@ namespace Core.Application.Pipelines.Caching
             {
                 response = await next();
                 TimeSpan? slidingExpiration = request.SlidingExpiration ?? TimeSpan.FromDays(_cacheSettings.SlidingExpiration);
-                DistributedCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
+                MemoryCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
                 byte[] serializeData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
-                await _cache.SetAsync(request.CacheKey, serializeData, cacheOptions, cancellationToken);
+                _cache.Set(request.CacheKey, serializeData, cacheOptions);
                 return response;
             }
 
-            byte[]? cachedResponse = await _cache.GetAsync(request.CacheKey, cancellationToken);
+            byte[]? cachedResponse = (byte[]?)_cache.Get(request.CacheKey);
             if (cachedResponse != null)
             {
                 response = JsonConvert.DeserializeObject<TResponse>(Encoding.Default.GetString(cachedResponse));
