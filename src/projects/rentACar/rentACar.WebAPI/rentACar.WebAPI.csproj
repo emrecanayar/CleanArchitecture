@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\corePackages\Core.Integration\Core.Integration\Core.Integration.csproj" />
     <ProjectReference Include="..\rentACar.Persistence\rentACar.Persistence.csproj" />
   </ItemGroup>
 
