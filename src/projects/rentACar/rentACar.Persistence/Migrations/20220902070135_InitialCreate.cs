@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace rentACar.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,21 @@ namespace rentACar.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "Name", "Status" },
+                values: new object[] { 1, "System", new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3215), "", null, "BMW", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "Name", "Status" },
+                values: new object[] { 2, "System", new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3218), "", null, "Mercedes", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "Name", "Status" },
+                values: new object[] { 3, "System", new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3220), "", null, "Audi", 1 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

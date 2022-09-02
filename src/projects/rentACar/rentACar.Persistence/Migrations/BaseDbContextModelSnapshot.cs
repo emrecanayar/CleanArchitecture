@@ -73,6 +73,38 @@ namespace rentACar.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3215),
+                            IsDeleted = false,
+                            ModifiedBy = "",
+                            Name = "BMW",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3218),
+                            IsDeleted = false,
+                            ModifiedBy = "",
+                            Name = "Mercedes",
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2022, 9, 2, 10, 1, 34, 867, DateTimeKind.Local).AddTicks(3220),
+                            IsDeleted = false,
+                            ModifiedBy = "",
+                            Name = "Audi",
+                            Status = 1
+                        });
                 });
 #pragma warning restore 612, 618
         }
