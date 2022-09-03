@@ -1,6 +1,7 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching.DisturbedCache;
 using Core.Application.Pipelines.Logging;
+using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
 using Core.Integration.Base;
 using Core.Integration.Dto;
@@ -37,6 +38,7 @@ namespace rentACar.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
 
             return services;
 
