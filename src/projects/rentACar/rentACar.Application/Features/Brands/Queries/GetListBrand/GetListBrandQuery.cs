@@ -1,36 +1,38 @@
 ﻿using Core.Application.Pipelines.Caching.DisturbedCache;
-using Core.Application.Requests;
-using Core.Persistence.Paging;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using rentACar.Application.Features.Brands.Dtos;
 using rentACar.Application.Features.Brands.Models;
 using rentACar.Application.Features.Brands.Profiles;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace rentACar.Application.Features.Brands.Queries.GetListBrand
 {
-    public class GetListBrandQuery : IRequest<BrandListModel>, ICachableRequest
+    public class GetListBrandQuery : IRequest<List<BrandListDto>>, ICachableRequest
     {
-        public PageRequest PageRequest { get; set; }
-
         public bool BypassCache { get; set; }
-        public string CacheKey => $"BrandList";
+        public string CacheKey => "BrandList";
         public TimeSpan? SlidingExpiration { get; set; }
-
-        public class GetListBrandQueryHander : IRequestHandler<GetListBrandQuery, BrandListModel>
+        public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<BrandListDto>>
         {
             private readonly IBrandRepository _brandRepository;
 
-            public GetListBrandQueryHander(IBrandRepository brandRepository)
+            public GetListBrandQueryHandler(IBrandRepository brandRepository)
             {
                 _brandRepository = brandRepository;
             }
 
-            public async Task<BrandListModel> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
+            public async Task<List<BrandListDto>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<Brand> brands = await _brandRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
-                BrandListModel mappedBrandListModel = ObjectMapper.Mapper.Map<BrandListModel>(brands);
-                return mappedBrandListModel;
+                List<Brand> brands = await _brandRepository.Query().Take(1000).ToListAsync();
+                var mappedBrandList = ObjectMapper.Mapper.Map<List<BrandListDto>>(brands);
+                return mappedBrandList;
             }
         }
     }

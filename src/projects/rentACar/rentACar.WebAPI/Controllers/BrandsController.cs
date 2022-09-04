@@ -5,6 +5,7 @@ using rentACar.Application.Features.Brands.Dtos;
 using rentACar.Application.Features.Brands.Models;
 using rentACar.Application.Features.Brands.Queries.GetByIdBrand;
 using rentACar.Application.Features.Brands.Queries.GetListBrand;
+using rentACar.Application.Features.Brands.Queries.GetListBrandPaginate;
 using rentACar.WebAPI.Controllers.Base;
 
 namespace rentACar.WebAPI.Controllers
@@ -19,11 +20,19 @@ namespace rentACar.WebAPI.Controllers
             return Created("", result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        [HttpGet("GetListPaginate")]
+        public async Task<IActionResult> GetListPaginate([FromQuery] PageRequest pageRequest)
         {
-            GetListBrandQuery getListBrandQuery = new() { PageRequest = pageRequest };
-            BrandListModel result = await Mediator.Send(getListBrandQuery);
+            GetListBrandPaginateQuery getListBrandPaginateQuery = new() { PageRequest = pageRequest };
+            BrandListModel result = await Mediator.Send(getListBrandPaginateQuery);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList()
+        {
+            GetListBrandQuery getListBrandQuery = new();
+            List<BrandListDto> result = await Mediator.Send(getListBrandQuery);
             return Ok(result);
         }
 
