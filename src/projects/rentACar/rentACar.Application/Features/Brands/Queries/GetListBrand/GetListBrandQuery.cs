@@ -1,4 +1,5 @@
-﻿using Core.Application.Pipelines.Caching.DisturbedCache;
+﻿using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Caching.DisturbedCache;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using rentACar.Application.Features.Brands.Dtos;
@@ -17,7 +18,7 @@ namespace rentACar.Application.Features.Brands.Queries.GetListBrand
     public class GetListBrandQuery : IRequest<List<BrandListDto>>, ICachableRequest
     {
         public bool BypassCache { get; set; }
-        public string CacheKey => "BrandList";
+        public string CacheKey => CacheKeys.BrandList;
         public TimeSpan? SlidingExpiration { get; set; }
         public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<BrandListDto>>
         {
