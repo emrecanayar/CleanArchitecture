@@ -1,4 +1,5 @@
-﻿using Core.Application.Requests;
+﻿using Core.Application.Pipelines.Caching.DisturbedCache;
+using Core.Application.Requests;
 using Core.Persistence.Paging;
 using MediatR;
 using rentACar.Application.Features.Brands.Models;
@@ -8,9 +9,14 @@ using rentACar.Domain.Entities;
 
 namespace rentACar.Application.Features.Brands.Queries.GetListBrand
 {
-    public class GetListBrandQuery : IRequest<BrandListModel>
+    public class GetListBrandQuery : IRequest<BrandListModel>, ICachableRequest
     {
         public PageRequest PageRequest { get; set; }
+
+        public bool BypassCache { get; set; }
+        public string CacheKey => $"BrandList";
+        public TimeSpan? SlidingExpiration { get; set; }
+
         public class GetListBrandQueryHander : IRequestHandler<GetListBrandQuery, BrandListModel>
         {
             private readonly IBrandRepository _brandRepository;

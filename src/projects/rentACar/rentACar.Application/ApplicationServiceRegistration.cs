@@ -32,6 +32,11 @@ namespace rentACar.Application
             services.AddScoped<IJsonSerializer, JsonSerializer>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379";
+            });
+
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
