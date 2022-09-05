@@ -1,4 +1,5 @@
 using Core.CrossCuttingConcerns.Exceptions;
+using Prometheus;
 using rentACar.Application;
 using rentACar.Persistence;
 
@@ -23,6 +24,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.UseConfigureCustomExceptionMiddleware();
+app.UseMetricServer();
+app.UseHttpMetrics();
+app.MapMetrics();
 app.MapControllers();
 
 app.Run();
