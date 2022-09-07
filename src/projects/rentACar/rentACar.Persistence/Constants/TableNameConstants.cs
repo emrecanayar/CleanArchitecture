@@ -9,5 +9,6 @@ namespace rentACar.Persistence.Constants
     public class TableNameConstants
     {
         public const string BRAND = "Brands";
+        public const string MODEL = "Models";
     }
 }

@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace rentACar.Domain.Entities
 {
-    public class Brand : Entity
+    public class Model : Entity
     {
+        public int BrandId { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Model> Models { get; set; }
+        public decimal DailyPrice { get; set; }
+        public string ImageUrl { get; set; }
+        public virtual Brand? Brand { get; set; }
 
-        public Brand()
+        public Model()
         {
-
         }
 
-        public Brand(int id, string name, RecordStatu status, string createdBy, DateTime createdDate, string modifiedBy, DateTime? modifiedDate, bool isDeleted) : this()
+        public Model(int id, int brandId, string name, decimal dailyPrice, string imageUrl, RecordStatu status, string createdBy, DateTime createdDate, string modifiedBy, DateTime? modifiedDate, bool isDeleted) : this()
         {
             Id = id;
+            BrandId = brandId;
             Name = name;
+            DailyPrice = dailyPrice;
+            ImageUrl = imageUrl;
             Status = status;
             CreatedBy = createdBy;
             CreatedDate = createdDate;

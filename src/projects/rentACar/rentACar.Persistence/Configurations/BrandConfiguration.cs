@@ -18,6 +18,7 @@ namespace rentACar.Persistence.Configurations
         {
             base.Configure(builder);
             builder.Property(x => x.Name).HasColumnName("Name").IsRequired(true).HasMaxLength(LengthContraints.NameMaxLength);
+            builder.HasMany(p => p.Models);
             builder.ToTable(TableNameConstants.BRAND);
         }
     }
