@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using rentACar.Application.Features.Brands.Dtos;
 using rentACar.Application.Features.Brands.Models;
-using rentACar.Application.Features.Brands.Profiles;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
 using System;

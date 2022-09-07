@@ -7,9 +7,9 @@ using rentACar.Domain.Entities;
 
 namespace rentACar.Application.Features.Brands.Profiles
 {
-    public class MappingProfiles : Profile
+    public class BrandMappingProfiles : Profile
     {
-        public MappingProfiles()
+        public BrandMappingProfiles()
         {
             CreateMap<Brand, CreatedBrandDto>().ReverseMap();
             CreateMap<Brand, CreateBrandCommand>().ReverseMap();
