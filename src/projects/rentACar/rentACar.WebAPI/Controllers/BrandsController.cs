@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Core.CrossCuttingConcerns.Filters;
 using Microsoft.AspNetCore.Mvc;
 using rentACar.Application.Features.Brands.Commands.CreateBrand;
 using rentACar.Application.Features.Brands.Dtos;
@@ -6,6 +7,7 @@ using rentACar.Application.Features.Brands.Models;
 using rentACar.Application.Features.Brands.Queries.GetByIdBrand;
 using rentACar.Application.Features.Brands.Queries.GetListBrand;
 using rentACar.Application.Features.Brands.Queries.GetListBrandPaginate;
+using rentACar.Domain.Entities;
 using rentACar.WebAPI.Controllers.Base;
 
 namespace rentACar.WebAPI.Controllers
@@ -36,6 +38,8 @@ namespace rentACar.WebAPI.Controllers
             return Ok(result);
         }
 
+
+        [ServiceFilter(typeof(NotFoundFilter<Brand>))]
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetByIdBrandQuery getByIdBrandQuery)
         {

@@ -15,5 +15,6 @@ namespace rentACar.Persistence.Repositories
         public BrandRepository(BaseDbContext context) : base(context)
         {
         }
+        
     }
 }

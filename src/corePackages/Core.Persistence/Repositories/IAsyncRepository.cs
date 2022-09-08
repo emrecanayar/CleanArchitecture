@@ -19,6 +19,8 @@ namespace Core.Persistence.Repositories
                                                  int index = 0, int size = 10, bool enableTracking = true,
                                                  CancellationToken cancellationToken = default);
 
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
+
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task<T> DeleteAsync(T entity);

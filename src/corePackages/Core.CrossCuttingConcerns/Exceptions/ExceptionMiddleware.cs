@@ -34,6 +34,7 @@ namespace Core.CrossCuttingConcerns.Exceptions
             if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
             if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
             if (exception.GetType() == typeof(AuthorizationException)) return CreateAuthorizationException(context, exception);
+            if (exception.GetType() == typeof(NotFoundException)) return CreateNotFoundException(context, exception);
 
             return CreateInternalException(context, exception);
         }
@@ -93,6 +94,21 @@ namespace Core.CrossCuttingConcerns.Exceptions
                 Detail = "",
                 Instance = "",
                 Errors = errors
+            }.ToString());
+        }
+
+        private Task CreateNotFoundException(HttpContext context, Exception exception)
+        {
+            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.NotFound);
+
+            return context.Response.WriteAsync(new ValidationProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://example.com/probs/validation",
+                Title = "NotFound exception",
+                Detail = exception.Message,
+                Instance = "",
+
             }.ToString());
         }
     }

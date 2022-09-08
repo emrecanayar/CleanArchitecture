@@ -6,6 +6,7 @@ using Core.Application.Pipelines.Validation;
 using Core.Integration.Base;
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
+using Core.Persistence.Repositories;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

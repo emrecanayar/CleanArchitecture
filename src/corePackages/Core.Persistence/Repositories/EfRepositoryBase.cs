@@ -100,7 +100,7 @@ namespace Core.Persistence.Repositories
         }
 
         public IPaginate<TEntity> GetListByDynamic(Dynamic.Dynamic dynamic,
-                                                   Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, 
+                                                   Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
                                                    int index = 0, int size = 10,
                                                    bool enableTracking = true)
         {
@@ -129,6 +129,11 @@ namespace Core.Persistence.Repositories
             Context.Entry(entity).State = EntityState.Deleted;
             Context.SaveChanges();
             return entity;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await Context.Set<TEntity>().AnyAsync(expression);
         }
     }
 }
