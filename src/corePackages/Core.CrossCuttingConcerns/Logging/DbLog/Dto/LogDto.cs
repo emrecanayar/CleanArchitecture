@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog.Dto
 {
     public class LogDto
     {
-        public int Id { get; set; }
+        public ObjectId Id { get; set; }
         public string UserId { get; set; }
         public DateTime LogDate { get; set; }
         public string Host { get; set; }

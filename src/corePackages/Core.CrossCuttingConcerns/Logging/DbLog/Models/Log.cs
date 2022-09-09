@@ -7,7 +7,7 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int Id { get; set; }
+        public ObjectId Id { get; set; }
         public string EventId { get; set; }
         public string LogDomain { get; set; }
         public string UserId { get; set; }

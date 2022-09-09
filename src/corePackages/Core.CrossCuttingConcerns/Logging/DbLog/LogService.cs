@@ -1,5 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Logging.DbLog.Dto;
 using Core.CrossCuttingConcerns.Logging.DbLog.Models;
+using Core.Helpers.Helpers;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
@@ -7,19 +8,20 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
 {
     public class LogService : ILogService
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<LogService> _logger;
         private readonly IMongoCollection<Log> _logCollection;
-        private const string STR_DATE_FORMAT = "yyyyMMdd";
 
-        public LogService(ILogger _logger, IMongoCollection<Log> logCollection, ILogDatabaseSettings logDatabaseSettings)
+
+        public LogService(ILogger<LogService> logger, ILogDatabaseSettings logDatabaseSettings)
         {
             var client = new MongoClient(logDatabaseSettings.ConnectionString);
             var database = client.GetDatabase(logDatabaseSettings.DatabaseName);
             _logCollection = database.GetCollection<Log>(logDatabaseSettings.LogCollectionName);
+            _logger = logger;
         }
         public async Task CreateLog(LogDto logDto)
         {
-
+            Log log = logDto.ToMap<Log>();
             await LogToDb(log);
         }
 

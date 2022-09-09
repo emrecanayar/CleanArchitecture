@@ -40,6 +40,7 @@ if (app.Environment.IsProduction())
 
 app.UseMetricServer();
 app.UseHttpMetrics();
+app.UseRequestResponseLoggingMiddleware();
 app.MapMetrics();
 app.MapControllers();
 
