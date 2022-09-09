@@ -1,5 +1,7 @@
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Filters;
+using Core.CrossCuttingConcerns.Logging.DbLog;
+using Microsoft.Extensions.Options;
 using Prometheus;
 using rentACar.Application;
 using rentACar.Persistence;
@@ -14,6 +16,12 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<LogDatabaseSettings>(builder.Configuration.GetSection("LogDatabaseSettings"));
+builder.Services.AddSingleton<ILogDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<LogDatabaseSettings>>().Value;
+});
 
 var app = builder.Build();
 

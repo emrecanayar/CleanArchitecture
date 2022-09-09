@@ -3,20 +3,15 @@ using Core.Application.Pipelines.Caching.DisturbedCache;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
+using Core.CrossCuttingConcerns.Logging.DbLog;
 using Core.Integration.Base;
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
-using Core.Persistence.Repositories;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using rentACar.Application.Features.Brands.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rentACar.Application
 {
@@ -31,6 +26,7 @@ namespace rentACar.Application
             services.AddScoped<BrandBusinessRules>();
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
+            services.AddScoped<ILogService, LogService>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
 
             services.AddStackExchangeRedisCache(options =>
