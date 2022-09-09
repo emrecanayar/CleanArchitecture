@@ -1,14 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using rentACar.Application.Features.Brands.Dtos;
 using rentACar.Application.Features.Brands.Rules;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rentACar.Application.Features.Brands.Queries.GetByIdBrand
 {
@@ -27,7 +21,7 @@ namespace rentACar.Application.Features.Brands.Queries.GetByIdBrand
                 _brandBusinessRules = brandBusinessRules;
             }
 
-           
+
             public async Task<BrandGetByIdDto> Handle(GetByIdBrandQuery request, CancellationToken cancellationToken)
             {
                 Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
