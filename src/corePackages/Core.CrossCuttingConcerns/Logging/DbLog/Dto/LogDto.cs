@@ -1,16 +1,13 @@
 ﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Logging.DbLog.Dto
 {
     public class LogDto
     {
         public ObjectId Id { get; set; }
+        public string EventId { get; set; }
+        public string LogDomain { get; set; }
         public string UserId { get; set; }
         public DateTime LogDate { get; set; }
         public string Host { get; set; }

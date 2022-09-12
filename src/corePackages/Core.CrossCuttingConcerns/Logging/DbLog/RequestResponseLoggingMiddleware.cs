@@ -2,7 +2,9 @@
 using Core.CrossCuttingConcerns.Logging.DbLog.Dto;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IO;
+using System.Net;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -46,6 +48,8 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
                 using var requestStream = _recyclableMemoryStreamManager.GetStream();
                 await context.Request.Body.CopyToAsync(requestStream);
                 log.RequestBody = ReadStreamInChunks(requestStream);
+                log.LogDomain = context.Request.Host.Host;
+                log.EventId = context.Connection.Id;
                 log.Path = context.Request.Path;
                 log.Host = context.Request.Host.Value;
                 log.QueryString = context.Request.QueryString.ToString();
@@ -81,7 +85,7 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
             catch (Exception exception)
             {
                 List<string> errors = new List<string>();
-                log.Exception = JsonSerializer.Serialize(exception);
+                log.Exception = JsonSerializer.Serialize(exception.StackTrace);
                 errors.Add(exception.ToString());
                 log.ExceptionMessage = JsonSerializer.Serialize(exception.Message);
                 errors.Add(GetErrorMessage(exception));
@@ -94,23 +98,40 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
                 }
 
                 context.Response.ContentType = "application/json";
-
+                string exceptionTitle = string.Empty;
                 switch (exception)
                 {
                     case BusinessException b:
-                        throw new BusinessException(b.Message);
+                        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                        exceptionTitle = "Business Exception";
+                        break;
                     case NotFoundException n:
-                        throw new NotFoundException(n.Message);
+                        context.Response.StatusCode = StatusCodes.Status404NotFound;
+                        exceptionTitle = "NotFound Exception";
+                        break;
                     case ValidationException v:
-                        throw new ValidationException(v.Message);
+                        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                        exceptionTitle = "Validation Exception";
+                        break;
                     case AuthorizationException a:
-                        throw new AuthorizationException(a.Message);
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        exceptionTitle = "Authorization Exception";
+                        break;
                     default:
-                        throw new BusinessException(exception.Message);
+                        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                        exceptionTitle = "Default Exception";
+                        break;
 
                 }
-                var response = "";
-                string jsonString = JsonSerializer.Serialize(response);
+                var result = new ProblemDetails
+                {
+                    Status = context.Response.StatusCode,
+                    Type = "https://example.com/probs/internal",
+                    Title = exceptionTitle,
+                    Detail = exception.Message,
+                    Instance = context.Request.Path
+                };
+                string jsonString = JsonSerializer.Serialize(result);
                 await context.Response.WriteAsync(jsonString);
             }
             finally

@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-if (app.Environment.IsProduction())
+//if (app.Environment.IsProduction())
     app.UseConfigureCustomExceptionMiddleware();
 
 
