@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace Core.Helpers.Helpers
 {
@@ -145,6 +146,89 @@ namespace Core.Helpers.Helpers
         public static bool IsExistDirectory(string directoryPath)
         {
             return Directory.Exists(directoryPath);
+        }
+
+        public static string GenerateURLForFile(IFormFile file, string webRootPath, string folderPath)
+        {
+            var randomName = Guid.NewGuid().ToString();
+            var type = Path.GetExtension(file.FileName);
+            CheckDirectoryExists(Path.Combine(webRootPath, folderPath.Replace("/", "\\")));
+            return $"{folderPath}\\{randomName}{type}".Replace("\\", "/");
+        }
+
+        public static string Upload(IFormFile file, string webRootPath, string filePath)
+        {
+            var isNotValid = CheckFileTypeValid(Path.GetExtension(file.FileName));
+            if (isNotValid)
+                throw new Exception("Type is not valid!");
+            CreateFile(Path.Combine(webRootPath, filePath), file);
+            return $"{filePath}";
+        }
+
+        public static bool Delete(string webRootPath, string path)
+        {
+            DeleteOldFile(Path.Combine(webRootPath, path).Replace("/", "\\"));
+            return true;
+        }
+
+        public static string GetNewPath(string webRootPath, string newFolder, string fileName)
+        {
+            CheckDirectoryExists(Path.Combine(webRootPath, newFolder.Replace("/", "\\")));
+            var path = Path.Combine(webRootPath, newFolder.Replace("/", "\\"), fileName);
+            return path;
+        }
+
+        public static string GetURLForFileFromFullPath(string webRootPath, string fullPath)
+        {
+            var path = fullPath.Replace(webRootPath, "");
+            return path.Substring(1).Replace("\\", "/");
+        }
+
+        private static bool CheckFileTypeValid(string type)
+        {
+            return type.ToLower() != ".xlsx" &&
+                type.ToLower() != ".xls" &&
+                type.ToLower() != ".xlsm" &&
+                type.ToLower() != ".xlm" &&
+                type.ToLower() != ".docx" &&
+                type.ToLower() != ".doc" &&
+                type.ToLower() != ".potx" &&
+                type.ToLower() != ".pot" &&
+                type.ToLower() != ".ppsx" &&
+                type.ToLower() != ".pps" &&
+                type.ToLower() != ".pptx" &&
+                type.ToLower() != ".ppt" &&
+                type.ToLower() != ".pdf" &&
+                type.ToLower() != ".jpeg" &&
+                type.ToLower() != ".png" &&
+                type.ToLower() != ".jpg" &&
+                type.ToLower() != ".svg" &&
+                type.ToLower() != ".mp4";
+        }
+
+        private static void CheckDirectoryExists(string directory)
+        {
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+        }
+
+        private static void CreateFile(string directory, IFormFile file)
+        {
+            using (FileStream fs = File.Create(directory.Replace("/", "\\")))
+            {
+                file.CopyTo(fs);
+                fs.Flush();
+            }
+        }
+
+        private static void DeleteOldFile(string directory)
+        {
+            if (File.Exists(directory.Replace("/", "\\")))
+            {
+                File.Delete(directory.Replace("/", "\\"));
+            }
         }
     }
 }
