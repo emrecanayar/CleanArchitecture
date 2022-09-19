@@ -10,5 +10,6 @@ namespace rentACar.Persistence.Constants
     {
         public const string BRAND = "Brands";
         public const string MODEL = "Models";
+        public const string DOCUMENT = "Documents";
     }
 }
