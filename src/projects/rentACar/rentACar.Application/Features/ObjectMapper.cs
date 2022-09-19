@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using rentACar.Application.Features.Brands.Profiles;
+using rentACar.Application.Features.Documents.Profiles;
 using rentACar.Application.Features.Models.Profiles;
 
 namespace rentACar.Application.Features
@@ -12,6 +13,7 @@ namespace rentACar.Application.Features
             {
                 configuration.AddProfile<BrandMappingProfiles>();
                 configuration.AddProfile<ModelMappingProfiles>();
+                configuration.AddProfile<DocumentMappingProfiles>();
             });
 
             return config.CreateMapper();
