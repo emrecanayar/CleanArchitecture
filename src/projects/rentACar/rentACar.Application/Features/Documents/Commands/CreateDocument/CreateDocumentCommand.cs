@@ -27,7 +27,11 @@ namespace rentACar.Application.Features.Documents.Commands.CreateDocument
                 string filePath = FileHelper.GenerateURLForFile(request.File, request.WebRootPath, DOCUMENT_FOLDER);
                 var document = await _documentBusinessRules.AddDocument(new DocumentDto
                 {
-                    FileType = _documentBusinessRules.DetectFileType(filePath)
+                    FileType = _documentBusinessRules.DetectFileType(filePath),
+                    DocumentName = request.File.FileName,
+                    Path = filePath,
+                    Extension = FileInfoHelper.GetFileExtension(filePath),
+                    Key = Guid.NewGuid().ToString()
                 });
                 FileHelper.Upload(request.File, request.WebRootPath, filePath);
                 return new CreatedDocumentDto { Path = filePath, Token = document.Token };

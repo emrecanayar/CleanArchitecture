@@ -26,4 +26,8 @@
     <ProjectReference Include="..\rentACar.Persistence\rentACar.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

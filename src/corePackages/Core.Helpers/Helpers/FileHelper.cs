@@ -150,10 +150,10 @@ namespace Core.Helpers.Helpers
 
         public static string GenerateURLForFile(IFormFile file, string webRootPath, string folderPath)
         {
-            var randomName = Guid.NewGuid().ToString();
+            var name = file.FileName.Split('.');
             var type = Path.GetExtension(file.FileName);
             CheckDirectoryExists(Path.Combine(webRootPath, folderPath.Replace("/", "\\")));
-            return $"{folderPath}\\{randomName}{type}".Replace("\\", "/");
+            return $"{folderPath}\\{name[0]}{type}".Replace("\\", "/");
         }
 
         public static string Upload(IFormFile file, string webRootPath, string filePath)

@@ -45,6 +45,7 @@ namespace rentACar.Application.Features.Documents.Rules
             {
                 Id = documentDto.Id,
                 Token = encryptedPath
+
             };
             await DocumentTokenCanNotBeDuplicatedWhenInserted(document.Token);
             await _documentRepository.AddAsync(document);

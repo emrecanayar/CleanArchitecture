@@ -11,6 +11,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using rentACar.Application.Features.Brands.Rules;
+using rentACar.Application.Features.Documents.Rules;
 using System.Reflection;
 
 namespace rentACar.Application
@@ -24,6 +25,7 @@ namespace rentACar.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<BrandBusinessRules>();
+            services.AddScoped<DocumentBusinessRules>();
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
             services.AddScoped<ILogService, LogService>();
