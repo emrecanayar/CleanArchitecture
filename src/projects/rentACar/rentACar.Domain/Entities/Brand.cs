@@ -1,10 +1,5 @@
 ﻿using Core.Persistence.ComplexTypes;
 using Core.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rentACar.Domain.Entities
 {
@@ -12,6 +7,7 @@ namespace rentACar.Domain.Entities
     {
         public string Name { get; set; }
         public virtual ICollection<Model> Models { get; set; }
+        public virtual ICollection<BrandDocument> BrandDocuments { get; set; }
 
         public Brand()
         {
