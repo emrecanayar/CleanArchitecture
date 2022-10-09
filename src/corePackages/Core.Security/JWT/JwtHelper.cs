@@ -3,14 +3,9 @@ using Core.Security.Entities;
 using Core.Security.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Security.JWT
 {
@@ -24,7 +19,7 @@ namespace Core.Security.JWT
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
         }
-        public RefreshToken CreateRefreshToken(User user, string ipAddress)
+        public Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)
         {
             RefreshToken refreshToken = new()
             {
@@ -35,10 +30,10 @@ namespace Core.Security.JWT
                 CreatedByIp = ipAddress
             };
 
-            return refreshToken;
+            return Task.FromResult(refreshToken);
         }
 
-        public AccessToken CreateToken(User user, IList<OperationClaim> operationClaims)
+        public Task<AccessToken> CreateToken(User user, IList<OperationClaim> operationClaims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             SecurityKey securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
@@ -47,11 +42,11 @@ namespace Core.Security.JWT
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
             string? token = jwtSecurityTokenHandler.WriteToken(jwt);
 
-            return new AccessToken
+            return Task.FromResult(new AccessToken
             {
                 Token = token,
                 Expiration = _accessTokenExpiration
-            };
+            });
         }
 
         private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredentials, IList<OperationClaim> operationClaims)

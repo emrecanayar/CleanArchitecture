@@ -10,6 +10,7 @@ using Core.Integration.Serialization;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using rentACar.Application.Features.Auths.Rules;
 using rentACar.Application.Features.BrandDocuments.Rules;
 using rentACar.Application.Features.Brands.Rules;
 using rentACar.Application.Features.Documents.Rules;
@@ -28,6 +29,7 @@ namespace rentACar.Application
             services.AddScoped<BrandBusinessRules>();
             services.AddScoped<DocumentBusinessRules>();
             services.AddScoped<BrandDocumentBusinessRules>();
+            services.AddScoped<AuthBusinessRules>();
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
             services.AddScoped<ILogService, LogService>();

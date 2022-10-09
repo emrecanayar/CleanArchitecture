@@ -1,6 +1,8 @@
 ﻿using Core.Security.Dtos;
 using MediatR;
 using rentACar.Application.Features.Auths.Dtos;
+using rentACar.Application.Features.Auths.Rules;
+using rentACar.Application.Services.Repositories;
 
 namespace rentACar.Application.Features.Auths.Commands.Register
 {
@@ -11,6 +13,8 @@ namespace rentACar.Application.Features.Auths.Commands.Register
 
         public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredDto>
         {
+            private readonly AuthBusinessRules _authBusinessRules;
+            private readonly IUserRepository _userRepository;
             public Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 throw new NotImplementedException();
