@@ -22,6 +22,14 @@ namespace rentACar.Application.Features.Auths.Commands.Register
             private readonly AuthBusinessRules _authBusinessRules;
             private readonly IUserRepository _userRepository;
             private readonly IAuthService _authService;
+
+            public RegisterCommandHandler(AuthBusinessRules authBusinessRules, IUserRepository userRepository, IAuthService authService)
+            {
+                _authBusinessRules = authBusinessRules;
+                _userRepository = userRepository;
+                _authService = authService;
+            }
+
             public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 await _authBusinessRules.EmailCantNotBeDuplicatedWhenRegistered(request.UserForRegister.Email);
