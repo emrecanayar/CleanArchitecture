@@ -20,7 +20,7 @@ namespace rentACar.WebAPI.Controllers
 
             RegisteredDto result = await Mediator.Send(registerCommand);
             SetRefreshTokenToCookie(result.RefreshToken);
-            return Created("", result);
+            return Created("", result.AccessToken);
         }
 
 
