@@ -17,6 +17,10 @@ namespace rentACar.Persistence
             services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             services.AddScoped<IBrandDocumentRepository, BrandDocumentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
 
             return services;
         }
