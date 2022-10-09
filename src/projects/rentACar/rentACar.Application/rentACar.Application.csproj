@@ -13,13 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BrandDocuments\Commands\" />
     <Folder Include="Features\BrandDocuments\Constants\" />
-    <Folder Include="Features\BrandDocuments\Dtos\" />
     <Folder Include="Features\BrandDocuments\Models\" />
     <Folder Include="Features\BrandDocuments\Profiles\" />
     <Folder Include="Features\BrandDocuments\Queries\" />
-    <Folder Include="Features\BrandDocuments\Rules\" />
     <Folder Include="Features\Brands\Constants\" />
     <Folder Include="Features\Documents\Constants\" />
     <Folder Include="Features\Documents\Models\" />
