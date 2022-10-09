@@ -8,5 +8,6 @@
         public const string BRAND_DOCUMENT = "BrandDocuments";
         public const string USER = "Users";
         public const string OPERATION_CLAIM = "OperationClaims";
+        public const string USER_OPERATION_CLAIM = "UserOperationClaims";
     }
 }
