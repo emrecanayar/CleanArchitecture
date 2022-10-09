@@ -1,10 +1,5 @@
 ﻿using Core.Persistence.Repositories;
 using Core.Security.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Security.Entities
 {
@@ -16,6 +11,7 @@ namespace Core.Security.Entities
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
         public AuthenticatorType AuthenticatorType { get; set; }
+        public CultureType CultureType { get; set; }
         public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; }
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
 
@@ -25,7 +21,7 @@ namespace Core.Security.Entities
             RefreshTokens = new HashSet<RefreshToken>();
         }
 
-        public User(int id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, AuthenticatorType authenticatorType) : this()
+        public User(int id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, AuthenticatorType authenticatorType, CultureType cultureType) : this()
         {
             Id = id;
             FirstName = firstName;
@@ -34,6 +30,7 @@ namespace Core.Security.Entities
             PasswordSalt = passwordSalt;
             PasswordHash = passwordHash;
             AuthenticatorType = authenticatorType;
+            CultureType = CultureType;
 
         }
     }

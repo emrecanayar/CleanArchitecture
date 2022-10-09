@@ -12,5 +12,7 @@ namespace rentACar.Persistence.Constants
         public const int CreatedByMaxLength = 100;
         public const int ModifiedByMaxLength = 100;
         public const int TokenMaxLength = 500;
+        public const int EmailMaxLength = 40;
+        public const int PasswordMaxLength = 256;
     }
 }

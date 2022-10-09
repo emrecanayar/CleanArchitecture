@@ -6,5 +6,6 @@
         public const string MODEL = "Models";
         public const string DOCUMENT = "Documents";
         public const string BRAND_DOCUMENT = "BrandDocuments";
+        public const string USER = "Users";
     }
 }
