@@ -1,6 +1,5 @@
 ﻿using Core.Persistence.ComplexTypes;
 using Core.Persistence.Repositories;
-using System.Xml.Linq;
 
 namespace rentACar.Domain.Entities
 {

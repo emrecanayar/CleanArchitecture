@@ -25,7 +25,7 @@ namespace rentACar.Application.Features.Documents.Commands.CreateDocument
             public async Task<CreatedDocumentDto> Handle(CreateDocumentCommand request, CancellationToken cancellationToken)
             {
                 string filePath = FileHelper.GenerateURLForFile(request.File, request.WebRootPath, DOCUMENT_FOLDER);
-                var document = await _documentBusinessRules.AddDocument(new DocumentDto
+                var document = await _documentBusinessRules.AddOrUpdateDocument(new DocumentDto
                 {
                     FileType = _documentBusinessRules.DetectFileType(filePath),
                     DocumentName = request.File.FileName,

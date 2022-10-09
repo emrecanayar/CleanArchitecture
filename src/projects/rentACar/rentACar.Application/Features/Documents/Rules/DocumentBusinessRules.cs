@@ -2,23 +2,17 @@
 using Core.Helpers.Helpers;
 using Core.Persistence.ComplexTypes;
 using Core.Persistence.Paging;
+using Core.Security.Constants;
 using Core.Security.Hashing;
-using Microsoft.IdentityModel.Tokens;
 using rentACar.Application.Features.Documents.Dtos;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace rentACar.Application.Features.Documents.Rules
 {
     public class DocumentBusinessRules
     {
-        private readonly string securitykey = "zKbVE-yEO'Gg9n7)e[8vJOf=dsUf&eP}";
         private readonly IDocumentRepository _documentRepository;
 
         public DocumentBusinessRules(IDocumentRepository documentRepository)
@@ -37,10 +31,10 @@ namespace rentACar.Application.Features.Documents.Rules
             if (document == null) throw new BusinessException("Requested document does not exist");
         }
 
-        public async Task<Document> AddDocument(DocumentDto documentDto)
+        public async Task<Document> AddOrUpdateDocument(DocumentDto documentDto)
         {
             var documentData = JsonSerializer.Serialize(documentDto);
-            var encryptedPath = HashingHelper.AESEncrypt(documentData, securitykey);
+            var encryptedPath = HashingHelper.AESEncrypt(documentData, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
             var document = new Document
             {
                 Id = documentDto.Id,
@@ -48,7 +42,13 @@ namespace rentACar.Application.Features.Documents.Rules
 
             };
             await DocumentTokenCanNotBeDuplicatedWhenInserted(document.Token);
-            await _documentRepository.AddAsync(document);
+
+            if (document.Id > 0)
+                await _documentRepository.UpdateAsync(document);
+            else
+                await _documentRepository.AddAsync(document);
+
+
             return document;
         }
         public FileType DetectFileType(string filePath)
