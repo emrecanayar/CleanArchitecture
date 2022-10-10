@@ -11,12 +11,13 @@ using Microsoft.OpenApi.Models;
 using Prometheus;
 using rentACar.Application;
 using rentACar.Persistence;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddSecurityServices();
