@@ -43,13 +43,14 @@ namespace Core.CrossCuttingConcerns.Exceptions
         {
             context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
 
-            return context.Response.WriteAsync(new ProblemDetails
+            return context.Response.WriteAsync(new ProblemDetailExtend
             {
                 Status = StatusCodes.Status500InternalServerError,
+                IsSuccess = false,
                 Type = "https://example.com/probs/internal",
                 Title = "Internal exception",
                 Detail = exception.Message,
-                Instance = ""
+                Instance = "",
             }.ToString());
         }
 
@@ -60,10 +61,11 @@ namespace Core.CrossCuttingConcerns.Exceptions
             return context.Response.WriteAsync(new AuthorizationProblemDetails
             {
                 Status = StatusCodes.Status401Unauthorized,
+                IsSuccess = false,
                 Type = "https://example.com/probs/authorization",
                 Title = "Authorization exception",
                 Detail = exception.Message,
-                Instance = ""
+                Instance = "",
             }.ToString());
         }
 
@@ -74,10 +76,11 @@ namespace Core.CrossCuttingConcerns.Exceptions
             return context.Response.WriteAsync(new BusinessProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
+                IsSuccess = false,
                 Type = "https://example.com/probs/business",
                 Title = "Business exception",
                 Detail = exception.Message,
-                Instance = ""
+                Instance = "",
             }.ToString());
         }
 
@@ -89,6 +92,7 @@ namespace Core.CrossCuttingConcerns.Exceptions
             return context.Response.WriteAsync(new ValidationProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
+                IsSuccess = false,
                 Type = "https://example.com/probs/validation",
                 Title = "Validation error(s)",
                 Detail = "",
@@ -104,6 +108,7 @@ namespace Core.CrossCuttingConcerns.Exceptions
             return context.Response.WriteAsync(new ValidationProblemDetails
             {
                 Status = StatusCodes.Status400BadRequest,
+                IsSuccess = false,
                 Type = "https://example.com/probs/validation",
                 Title = "NotFound exception",
                 Detail = exception.Message,
