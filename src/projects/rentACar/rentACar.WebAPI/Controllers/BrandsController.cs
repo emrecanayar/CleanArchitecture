@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Core.Application.ResponseTypes.Concrete;
 using Core.CrossCuttingConcerns.Filters;
 using Microsoft.AspNetCore.Mvc;
 using rentACar.Application.Features.Brands.Commands.CreateBrand;
@@ -34,8 +35,8 @@ namespace rentACar.WebAPI.Controllers
         public async Task<IActionResult> GetList()
         {
             GetListBrandQuery getListBrandQuery = new();
-            List<BrandListDto> result = await Mediator.Send(getListBrandQuery);
-            return Ok(result);
+            CustomResponseDto<List<BrandListDto>> result = await Mediator.Send(getListBrandQuery);
+            return CreateActionResult(result);
         }
 
 
