@@ -15,6 +15,7 @@ using rentACar.Application.Features.BrandDocuments.Rules;
 using rentACar.Application.Features.Brands.Rules;
 using rentACar.Application.Features.Documents.Rules;
 using rentACar.Application.Services.AuthService;
+using rentACar.Application.Services.DocumentService;
 using System.Reflection;
 
 namespace rentACar.Application
@@ -36,6 +37,7 @@ namespace rentACar.Application
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IDocumentService, DocumentManager>();
 
             services.AddStackExchangeRedisCache(options =>
             {
