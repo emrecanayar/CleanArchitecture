@@ -16,35 +16,6 @@ namespace rentACar.Persistence.Repositories
         {
         }
 
-        public async Task<FileUploadResultDto> TransferFile(string token, string newFolderPath, string webRootPath)
-        {
-            var document = await GetAsync(x => x.Token == token);
-            if (document == null) return null;
-
-            var decryptedDocumentData = HashingHelper.AESDecrypt(document.Token, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
-
-            var documentDto = JsonSerializer.Deserialize<DocumentDto>(decryptedDocumentData);
-
-            var newLocationFullPath = DocumentTransferNewLocation(documentDto.Path, newFolderPath, webRootPath);
-
-            documentDto.Path = FileHelper.GetURLForFileFromFullPath(webRootPath, newLocationFullPath);
-
-            return new FileUploadResultDto { Id = documentDto.Id, Path = documentDto.Path };
-        }
-
-        private string DocumentTransferNewLocation(string fileFullPath, string newFolder, string webRootPath)
-        {
-            var fileName = Path.GetFileName(fileFullPath);
-            var oldLocation = Path.Combine(webRootPath, fileFullPath.Replace("/", "\\"));
-            var newLocation = FileHelper.GetNewPath(webRootPath, newFolder, fileName);
-            if (File.Exists(newLocation))
-            {
-                var extension = Path.GetExtension(fileName);
-                fileName = Guid.NewGuid().ToString() + extension;
-                newLocation = Path.Combine(webRootPath, newFolder, fileName);
-            }
-            File.Move(oldLocation, newLocation, false);
-            return newLocation;
-        }
+   
     }
 }

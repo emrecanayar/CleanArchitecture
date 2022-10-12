@@ -6,6 +6,6 @@ namespace rentACar.Application.Services.Repositories
 {
     public interface IDocumentRepository : IAsyncRepository<Document>, IRepository<Document>
     {
-        Task<FileUploadResultDto> TransferFile(string token, string newFolderPath, string webRootPath);
+    
     }
 }

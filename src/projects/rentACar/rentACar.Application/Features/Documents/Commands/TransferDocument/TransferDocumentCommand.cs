@@ -2,6 +2,7 @@
 using MediatR;
 using rentACar.Application.Features.Documents.Dtos;
 using rentACar.Application.Features.Documents.Rules;
+using rentACar.Application.Services.DocumentService;
 using rentACar.Application.Services.Repositories;
 
 namespace rentACar.Application.Features.Documents.Commands.TransferDocument
@@ -14,18 +15,18 @@ namespace rentACar.Application.Features.Documents.Commands.TransferDocument
 
         public class TransferDocumentCommandHandler : IRequestHandler<TransferDocumentCommand, TransferDocumentDto>
         {
-            private IDocumentRepository _documentRepository;
+            private IDocumentService _documentService;
             private readonly DocumentBusinessRules _documentBusinessRules;
 
-            public TransferDocumentCommandHandler(IDocumentRepository documentRepository, DocumentBusinessRules documentBusinessRules)
+            public TransferDocumentCommandHandler(IDocumentRepository documentRepository, DocumentBusinessRules documentBusinessRules, IDocumentService documentService)
             {
-                _documentRepository = documentRepository;
                 _documentBusinessRules = documentBusinessRules;
+                _documentService = documentService;
             }
 
             public async Task<TransferDocumentDto> Handle(TransferDocumentCommand request, CancellationToken cancellationToken)
             {
-                var result = await _documentRepository.TransferFile(request.Token, request.NewFolderPath, request.WebRootPath);
+                var result = await _documentService.TransferFile(request.Token, request.NewFolderPath, request.WebRootPath);
 
                 var addedOrUpdatedResult = await _documentBusinessRules.AddOrUpdateDocument(new DocumentDto
                 {
