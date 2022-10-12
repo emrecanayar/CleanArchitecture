@@ -1,4 +1,5 @@
-﻿using rentACar.Application.Services.Repositories;
+﻿using rentACar.Application.Services.DocumentService;
+using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
 
 namespace rentACar.Application.Features.BrandDocuments.Rules
@@ -7,10 +8,12 @@ namespace rentACar.Application.Features.BrandDocuments.Rules
     {
         private readonly string FILE_FOLDER = Path.Combine("Resources", "Files", "BrandDocuments");
         private readonly IBrandDocumentRepository _brandDocumentRepository;
+        private readonly IDocumentService _documentService;
         private readonly IDocumentRepository _documentRepository;
-        public BrandDocumentBusinessRules(IBrandDocumentRepository brandDocumentRepository, IDocumentRepository documentRepository)
+        public BrandDocumentBusinessRules(IBrandDocumentRepository brandDocumentRepository, IDocumentRepository documentRepository, IDocumentService documentService)
         {
             _brandDocumentRepository = brandDocumentRepository;
+            _documentService = documentService;
             _documentRepository = documentRepository;
         }
 
@@ -32,7 +35,7 @@ namespace rentACar.Application.Features.BrandDocuments.Rules
                     };
 
                     var newBrandDocument = await _brandDocumentRepository.AddAsync(brandDocument);
-                    await _documentRepository.TransferFile(documentToken, FILE_FOLDER, webRootPath);
+                    await _documentService.TransferFile(documentToken, FILE_FOLDER, webRootPath);
                 }
                 else
                 {

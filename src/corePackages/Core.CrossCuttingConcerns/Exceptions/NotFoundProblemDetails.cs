@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Core.CrossCuttingConcerns.Exceptions
 {
-    public class AuthorizationProblemDetails : ProblemDetailsExtend
+    public class NotFoundProblemDetails : ProblemDetailsExtend
     {
         public override string ToString() => JsonConvert.SerializeObject(this);
     }

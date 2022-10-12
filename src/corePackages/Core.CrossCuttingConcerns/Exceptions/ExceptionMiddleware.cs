@@ -43,7 +43,7 @@ namespace Core.CrossCuttingConcerns.Exceptions
         {
             context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
 
-            return context.Response.WriteAsync(new ProblemDetailExtend
+            return context.Response.WriteAsync(new ProblemDetailsExtend
             {
                 Status = StatusCodes.Status500InternalServerError,
                 IsSuccess = false,

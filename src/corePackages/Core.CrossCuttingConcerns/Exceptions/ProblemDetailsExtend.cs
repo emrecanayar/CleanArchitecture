@@ -2,7 +2,7 @@
 
 namespace Core.CrossCuttingConcerns.Exceptions
 {
-    public class ProblemDetailExtend : ProblemDetails
+    public class ProblemDetailsExtend : ProblemDetails
     {
         public bool IsSuccess { get; set; }
     }
