@@ -15,7 +15,7 @@ public class ModelsController : BaseController
     public async Task<ActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
         GetListModelPaginateQuery getListModelPaginateQuery = new GetListModelPaginateQuery { PageRequest = pageRequest };
-        ModelListModel result = await Mediator.Send(getListModelPaginateQuery);
+        CustomResponseDto<ModelListModel> result = await Mediator.Send(getListModelPaginateQuery);
         return Ok(result);
     }
 
