@@ -44,7 +44,7 @@ namespace rentACar.WebAPI.Controllers
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetByIdBrandQuery getByIdBrandQuery)
         {
-            BrandGetByIdDto result = await Mediator.Send(getByIdBrandQuery);
+            CustomResponseDto<BrandGetByIdDto> result = await Mediator.Send(getByIdBrandQuery);
             return Ok(result);
         }
 
