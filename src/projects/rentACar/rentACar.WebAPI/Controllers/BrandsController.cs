@@ -27,7 +27,7 @@ namespace rentACar.WebAPI.Controllers
         public async Task<IActionResult> GetListPaginate([FromQuery] PageRequest pageRequest)
         {
             GetListBrandPaginateQuery getListBrandPaginateQuery = new() { PageRequest = pageRequest };
-            BrandListModel result = await Mediator.Send(getListBrandPaginateQuery);
+            CustomResponseDto<BrandListModel> result = await Mediator.Send(getListBrandPaginateQuery);
             return Ok(result);
         }
 
