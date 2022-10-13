@@ -4,6 +4,8 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
 using Core.CrossCuttingConcerns.Logging.DbLog;
+using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
+using Core.CrossCuttingConcerns.Logging.SeriLog;
 using Core.Integration.Base;
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
@@ -32,12 +34,16 @@ namespace rentACar.Application
             services.AddScoped<DocumentBusinessRules>();
             services.AddScoped<BrandDocumentBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
+
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
+
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IDocumentService, DocumentManager>();
+
+            services.AddSingleton<LoggerServiceBase, FileLogger>();
 
             services.AddStackExchangeRedisCache(options =>
             {

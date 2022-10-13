@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core.Application.Pipelines.Logging;
+using MediatR;
 using rentACar.Application.Features.Brands.Dtos;
 using rentACar.Application.Features.Brands.Rules;
 using rentACar.Application.Services.Repositories;
@@ -6,7 +7,7 @@ using rentACar.Domain.Entities;
 
 namespace rentACar.Application.Features.Brands.Commands.CreateBrand
 {
-    public class CreateBrandCommand : IRequest<CreatedBrandDto>
+    public class CreateBrandCommand : IRequest<CreatedBrandDto>, ILoggableRequest
     {
         public string Name { get; set; }
 

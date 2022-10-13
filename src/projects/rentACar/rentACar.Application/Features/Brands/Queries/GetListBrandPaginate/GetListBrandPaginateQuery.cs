@@ -1,4 +1,5 @@
-﻿using Core.Application.Requests;
+﻿using Core.Application.Pipelines.Logging;
+using Core.Application.Requests;
 using Core.Application.ResponseTypes.Concrete;
 using Core.Persistence.Paging;
 using MediatR;
@@ -9,7 +10,7 @@ using System.Net;
 
 namespace rentACar.Application.Features.Brands.Queries.GetListBrandPaginate
 {
-    public class GetListBrandPaginateQuery : IRequest<CustomResponseDto<BrandListModel>>
+    public class GetListBrandPaginateQuery : IRequest<CustomResponseDto<BrandListModel>>, ILoggableRequest
     {
         public PageRequest PageRequest { get; set; }
 
