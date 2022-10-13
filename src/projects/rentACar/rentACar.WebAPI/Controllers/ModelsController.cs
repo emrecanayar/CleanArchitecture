@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Core.Application.ResponseTypes.Concrete;
 using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using rentACar.Application.Features.Models.Models;
@@ -22,7 +23,7 @@ public class ModelsController : BaseController
     public async Task<ActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
     {
         GetListModelByDynamicQuery getListModelByDynamicQuery = new GetListModelByDynamicQuery { PageRequest = pageRequest, Dynamic = dynamic };
-        ModelListModel result = await Mediator.Send(getListModelByDynamicQuery);
+        CustomResponseDto<ModelListModel> result = await Mediator.Send(getListModelByDynamicQuery);
         return Ok(result);
     }
 }
