@@ -19,6 +19,7 @@ using rentACar.Application.Features.Documents.Rules;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.DocumentService;
 using System.Reflection;
+using rentACar.Application.Services.UserService;
 
 namespace rentACar.Application
 {
@@ -42,6 +43,7 @@ namespace rentACar.Application
             services.AddScoped<IBaseRestClient, BaseRestClient>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IDocumentService, DocumentManager>();
+            services.AddScoped<IUserService, UserManager>();
 
             services.AddSingleton<LoggerServiceBase, FileLogger>();
 
