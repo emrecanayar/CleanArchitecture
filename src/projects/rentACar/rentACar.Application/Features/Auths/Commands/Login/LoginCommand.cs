@@ -41,6 +41,8 @@ namespace rentACar.Application.Features.Auths.Commands.Login
                 RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(user, request.IPAddress);
                 RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
+                await _authService.DeleteOldRefreshTokens(user.Id);
+
                 loggedDto.AccessToken = createdAccessToken;
                 loggedDto.RefreshToken = addedRefreshToken;
                 return CustomResponseDto<LoggedDto>.Success((int)HttpStatusCode.OK, loggedDto, isSuccess: true);
