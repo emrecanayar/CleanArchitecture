@@ -1,4 +1,5 @@
-﻿using Core.Security.Dtos;
+﻿using Core.Application.ResponseTypes.Concrete;
+using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.JWT;
 using MediatR;
@@ -6,15 +7,16 @@ using rentACar.Application.Features.Auths.Dtos;
 using rentACar.Application.Features.Auths.Rules;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.UserService;
+using System.Net;
 
 namespace rentACar.Application.Features.Auths.Commands.Login
 {
-    public class LoginCommand : IRequest<LoggedDto>
+    public class LoginCommand : IRequest<CustomResponseDto<LoggedDto>>
     {
         public UserForLoginDto UserForLoginDto { get; set; }
         public string IPAddress { get; set; }
 
-        public class LoginCommandHandler : IRequestHandler<LoginCommand, LoggedDto>
+        public class LoginCommandHandler : IRequestHandler<LoginCommand, CustomResponseDto<LoggedDto>>
         {
             private readonly IUserService _userService;
             private readonly IAuthService _authService;
@@ -27,7 +29,7 @@ namespace rentACar.Application.Features.Auths.Commands.Login
                 _authBusinessRules = authBusinessRules;
             }
 
-            public async Task<LoggedDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+            public async Task<CustomResponseDto<LoggedDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
                 User? user = await _userService.GetByEmail(request.UserForLoginDto.Email);
                 await _authBusinessRules.UserShouldBeExists(user);
@@ -41,7 +43,7 @@ namespace rentACar.Application.Features.Auths.Commands.Login
 
                 loggedDto.AccessToken = createdAccessToken;
                 loggedDto.RefreshToken = addedRefreshToken;
-                return loggedDto;
+                return CustomResponseDto<LoggedDto>.Success((int)HttpStatusCode.OK, loggedDto, isSuccess: true);
             }
         }
     }

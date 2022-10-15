@@ -1,4 +1,5 @@
-﻿using Core.Security.Dtos;
+﻿using Core.Application.ResponseTypes.Concrete;
+using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
 using rentACar.Application.Features.Auths.Commands.Login;
@@ -22,11 +23,11 @@ namespace rentACar.WebAPI.Controllers
         {
             LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IPAddress = GetIpAddress() };
 
-            LoggedDto result = await Mediator.Send(loginCommand);
+            CustomResponseDto<LoggedDto> result = await Mediator.Send(loginCommand);
 
-            if (result.RefreshToken is not null) SetRefreshTokenToCookie(result.RefreshToken);
+            if (result.Data.RefreshToken is not null) SetRefreshTokenToCookie(result.Data.RefreshToken);
 
-            return Ok(result.CreateResponseDto());
+            return Ok(result.Data.CreateResponseDto());
         }
 
         [HttpPost("Register")]

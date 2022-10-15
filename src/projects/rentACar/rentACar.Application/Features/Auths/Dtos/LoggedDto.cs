@@ -1,4 +1,5 @@
-﻿using Core.Security.Entities;
+﻿using Core.Application.ResponseTypes.Concrete;
+using Core.Security.Entities;
 using Core.Security.Enums;
 using Core.Security.JWT;
 
@@ -11,9 +12,9 @@ namespace rentACar.Application.Features.Auths.Dtos
         public RefreshToken? RefreshToken { get; set; }
         public AuthenticatorType? RequiredAuthenticatorType { get; set; }
 
-        public LoggedResponseDto CreateResponseDto()
+        public CustomResponseDto<LoggedResponseDto> CreateResponseDto()
         {
-            return new() { AccessToken = AccessToken, RequiredAuthenticatorType = RequiredAuthenticatorType };
+            return new CustomResponseDto<LoggedResponseDto>() { Data = new() { AccessToken = AccessToken, RequiredAuthenticatorType = RequiredAuthenticatorType } };
         }
 
         public class LoggedResponseDto
