@@ -1,6 +1,7 @@
 ﻿using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
+using rentACar.Application.Features.Auths.Commands.Login;
 using rentACar.Application.Features.Auths.Commands.Register;
 using rentACar.Application.Features.Auths.Dtos;
 using rentACar.WebAPI.Controllers.Base;
@@ -9,6 +10,25 @@ namespace rentACar.WebAPI.Controllers
 {
     public class AuthController : BaseController
     {
+        private readonly WebAPIConfiguration _configuration;
+
+        public AuthController(IConfiguration configuration)
+        {
+            _configuration = configuration.GetSection("WebAPIConfiguration").Get<WebAPIConfiguration>();
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+        {
+            LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IPAddress = GetIpAddress() };
+
+            LoggedDto result = await Mediator.Send(loginCommand);
+
+            if (result.RefreshToken is not null) SetRefreshTokenToCookie(result.RefreshToken);
+
+            return Ok(result.CreateResponseDto());
+        }
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
@@ -23,7 +43,6 @@ namespace rentACar.WebAPI.Controllers
             return Created("", result.AccessToken);
         }
 
-
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)
         {
             CookieOptions cookieOptions = new()
@@ -36,4 +55,3 @@ namespace rentACar.WebAPI.Controllers
         }
     }
 }
-
