@@ -12,12 +12,15 @@ using Prometheus;
 using rentACar.Application;
 using rentACar.Persistence;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
+builder.Services.AddControllers()
+ .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
+ .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddSecurityServices();

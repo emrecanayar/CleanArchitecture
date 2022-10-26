@@ -14,12 +14,13 @@ namespace rentACar.Application.Features.Auths.Dtos
 
         public CustomResponseDto<LoggedResponseDto> CreateResponseDto()
         {
-            return new CustomResponseDto<LoggedResponseDto>() { Data = new() { AccessToken = AccessToken, RequiredAuthenticatorType = RequiredAuthenticatorType } };
+            return new CustomResponseDto<LoggedResponseDto>() { Data = new() { AccessToken = AccessToken, RefreshToken = RefreshToken, RequiredAuthenticatorType = RequiredAuthenticatorType } };
         }
 
         public class LoggedResponseDto
         {
             public AccessToken? AccessToken { get; set; }
+            public RefreshToken? RefreshToken { get; set; }
             public AuthenticatorType? RequiredAuthenticatorType { get; set; }
         }
     }
