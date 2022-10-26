@@ -6,7 +6,7 @@ using rentACar.Application.Features.Auths.Rules;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.UserService;
 
-namespace rentACar.Application.Features.Auths.Commands.RefreshToken
+namespace rentACar.Application.Features.Auths.Commands.RefreshTokens
 {
     public class RefreshTokenCommand : IRequest<RefreshedTokensDto>
     {
@@ -28,7 +28,7 @@ namespace rentACar.Application.Features.Auths.Commands.RefreshToken
 
             public async Task<RefreshedTokensDto> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
             {
-                var refreshToken = await _authService.GetRefreshTokenByToken(request.RefreshToken);
+                RefreshToken refreshToken = await _authService.GetRefreshTokenByToken(request.RefreshToken);
                 await _authBusinessRules.RefreshTokenShouldBeExists(refreshToken);
 
                 if (refreshToken.Revoked != null)
@@ -39,8 +39,8 @@ namespace rentACar.Application.Features.Auths.Commands.RefreshToken
 
                 User user = await _userService.GetById(refreshToken.UserId);
 
-                var newRefreshToken = await _authService.RotateRefreshToken(user, refreshToken, request.IPAddress);
-                var addedRefreshToken = await _authService.AddRefreshToken(newRefreshToken);
+                RefreshToken newRefreshToken = await _authService.RotateRefreshToken(user, refreshToken, request.IPAddress);
+                RefreshToken addedRefreshToken = await _authService.AddRefreshToken(newRefreshToken);
                 await _authService.DeleteOldRefreshTokens(refreshToken.UserId);
 
                 AccessToken createdAccessToken = await _authService.CreateAccessToken(user);
