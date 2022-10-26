@@ -3,11 +3,7 @@ using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Persistence.Repositories
 {
@@ -16,13 +12,17 @@ namespace Core.Persistence.Repositories
     where TContext : DbContext
     {
         protected TContext Context { get; }
+
         public EfRepositoryBase(TContext context)
         {
             Context = context;
         }
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
-            return await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+            IQueryable<TEntity?> query = Context.Set<TEntity>().AsQueryable();
+            if (include != null) query = include(query);
+            return await query.FirstOrDefaultAsync(predicate);
         }
 
         public async Task<IPaginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null,
@@ -79,9 +79,11 @@ namespace Core.Persistence.Repositories
             return entity;
         }
 
-        public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
+        public TEntity? Get(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
-            return Context.Set<TEntity>().FirstOrDefault(predicate);
+            IQueryable<TEntity?> query = Context.Set<TEntity>().AsQueryable();
+            if (include != null) query = include(query);
+            return query.FirstOrDefault(predicate);
         }
 
         public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null,
