@@ -20,6 +20,7 @@ using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.DocumentService;
 using System.Reflection;
 using rentACar.Application.Services.UserService;
+using Core.Application.Pipelines.Transaction;
 
 namespace rentACar.Application
 {
@@ -59,6 +60,7 @@ namespace rentACar.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionScopeBehavior<,>));
 
             return services;
 
