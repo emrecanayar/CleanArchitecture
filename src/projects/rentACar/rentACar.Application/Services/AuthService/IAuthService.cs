@@ -10,5 +10,9 @@ namespace rentACar.Application.Services.AuthService
         public Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken);
         public Task<RefreshToken?> GetRefreshTokenByToken(string token);
         public Task DeleteOldRefreshTokens(int userId);
+        public Task RevokeDescendantRefreshTokens(RefreshToken refreshToken, string ipAddress, string reason);
+        public Task RevokeRefreshToken(RefreshToken token, string ipAddress, string? reason = null,
+                               string? replacedByToken = null);
+        public Task<RefreshToken> RotateRefreshToken(User user, RefreshToken refreshToken, string ipAddress);
     }
 }

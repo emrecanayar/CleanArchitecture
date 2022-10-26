@@ -3,7 +3,7 @@ using Core.Security.JWT;
 
 namespace rentACar.Application.Features.Auths.Dtos
 {
-    public class RefreshedTokenDto
+    public class RefreshedTokensDto
     {
         public AccessToken AccessToken { get; set; }
         public RefreshToken RefreshToken { get; set; }

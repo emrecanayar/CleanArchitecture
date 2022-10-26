@@ -64,5 +64,31 @@ namespace rentACar.Application.Services.AuthService
             RefreshToken? refreshToken = await _refreshTokenRepository.GetAsync(r => r.Token == token);
             return refreshToken;
         }
+
+        public async Task RevokeDescendantRefreshTokens(RefreshToken refreshToken, string ipAddress, string reason)
+        {
+            RefreshToken childToken = await _refreshTokenRepository.GetAsync(r => r.Token == refreshToken.ReplacedByToken);
+
+            if (childToken != null && childToken.Revoked != null && childToken.Expires <= DateTime.UtcNow)
+                await RevokeRefreshToken(childToken, ipAddress, reason);
+            else await RevokeDescendantRefreshTokens(childToken, ipAddress, reason);
+        }
+
+        public async Task RevokeRefreshToken(RefreshToken refreshToken, string ipAddress, string? reason = null,
+                                        string? replacedByToken = null)
+        {
+            refreshToken.Revoked = DateTime.UtcNow;
+            refreshToken.RevokedByIp = ipAddress;
+            refreshToken.ReasonRevoked = reason;
+            refreshToken.ReplacedByToken = replacedByToken;
+            await _refreshTokenRepository.UpdateAsync(refreshToken);
+        }
+
+        public async Task<RefreshToken> RotateRefreshToken(User user, RefreshToken refreshToken, string ipAddress)
+        {
+            RefreshToken newRefreshToken = await _tokenHelper.CreateRefreshToken(user, ipAddress);
+            await RevokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
+            return newRefreshToken;
+        }
     }
 }

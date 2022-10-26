@@ -33,5 +33,18 @@ namespace rentACar.Application.Features.Auths.Rules
             if (!HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 throw new BusinessException(AuthMessages.PasswordDontMatch);
         }
+
+        public Task RefreshTokenShouldBeExists(RefreshToken? refreshToken)
+        {
+            if (refreshToken == null) throw new BusinessException(AuthMessages.RefreshDontExists);
+            return Task.CompletedTask;
+        }
+
+        public Task RefreshTokenShouldBeActive(RefreshToken refreshToken)
+        {
+            if (refreshToken.Revoked != null && DateTime.UtcNow >= refreshToken.Expires)
+                throw new BusinessException(AuthMessages.InvalidRefreshToken);
+            return Task.CompletedTask;
+        }
     }
 }
