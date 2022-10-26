@@ -21,11 +21,11 @@ namespace rentACar.WebAPI.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
-            LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IPAddress = GetIpAddress() };
+            LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IPAddress = getIpAddress() };
 
             CustomResponseDto<LoggedDto> result = await Mediator.Send(loginCommand);
 
-            if (result.Data.RefreshToken is not null) SetRefreshTokenToCookie(result.Data.RefreshToken);
+            if (result.Data.RefreshToken is not null) setRefreshTokenToCookie(result.Data.RefreshToken);
 
             return Ok(result.Data.CreateResponseDto());
         }
@@ -36,15 +36,16 @@ namespace rentACar.WebAPI.Controllers
             RegisterCommand registerCommand = new()
             {
                 UserForRegister = userForRegisterDto,
-                IpAddress = GetIpAddress()
+                IpAddress = getIpAddress()
             };
 
             RegisteredDto result = await Mediator.Send(registerCommand);
-            SetRefreshTokenToCookie(result.RefreshToken);
+            setRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
         }
 
-        private void SetRefreshTokenToCookie(RefreshToken refreshToken)
+
+        private void setRefreshTokenToCookie(RefreshToken refreshToken)
         {
             CookieOptions cookieOptions = new()
             {
