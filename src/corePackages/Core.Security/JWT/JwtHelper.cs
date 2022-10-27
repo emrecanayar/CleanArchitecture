@@ -27,7 +27,8 @@ namespace Core.Security.JWT
                 Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
                 Expires = DateTime.UtcNow.AddDays(7),
                 Created = DateTime.UtcNow,
-                CreatedByIp = ipAddress
+                CreatedByIp = ipAddress,
+                Revoked = null
             };
 
             return Task.FromResult(refreshToken);

@@ -18,7 +18,7 @@ namespace rentACar.Persistence.Configurations
             builder.Property(x => x.Created).HasColumnName("Created").IsRequired(true).ValueGeneratedOnAdd();
             builder.Property(x => x.CreatedByIp
             ).HasColumnName("CreatedByIp").IsRequired(true).HasMaxLength(LengthContraints.CreatedByMaxLength).ValueGeneratedOnAdd();
-            builder.Property(x => x.Revoked).HasColumnName("Revoked").IsRequired(true).ValueGeneratedOnAdd();
+            builder.Property(x => x.Revoked).HasColumnName("Revoked").IsRequired(false).ValueGeneratedOnAdd();
             builder.Property(x => x.RevokedByIp
                 ).HasColumnName("RevokedByIp").IsRequired(false).HasMaxLength(LengthContraints.CreatedByMaxLength).ValueGeneratedOnAdd();
             builder.Property(x => x.ReplacedByToken
