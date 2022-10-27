@@ -2,9 +2,11 @@
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using rentACar.Application.Features.Auths.Commands.Login;
 using rentACar.Application.Features.Auths.Commands.RefreshTokens;
 using rentACar.Application.Features.Auths.Commands.Register;
+using rentACar.Application.Features.Auths.Commands.RevokeToken;
 using rentACar.Application.Features.Auths.Dtos;
 using rentACar.WebAPI.Controllers.Base;
 
@@ -53,6 +55,20 @@ namespace rentACar.WebAPI.Controllers
             RefreshedTokensDto result = await Mediator.Send(refreshTokenCommand);
             setRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
+        }
+
+        [HttpPut("RevokeToken")]
+        public async Task<IActionResult> RevokeToken(
+       [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
+        string? refreshToken)
+        {
+            RevokeTokenCommand revokeTokenCommand = new()
+            {
+                Token = refreshToken ?? getRefreshTokenFromCookies(),
+                IPAddress = getIpAddress()
+            };
+            RevokedTokenDto result = await Mediator.Send(revokeTokenCommand);
+            return Ok(result);
         }
 
         private string? getRefreshTokenFromCookies()

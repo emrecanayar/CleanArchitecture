@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Features\Auths\Models\" />
     <Folder Include="Features\Auths\Queries\" />
-    <Folder Include="Features\Auths\Profiles\" />
     <Folder Include="Features\BrandDocuments\Constants\" />
     <Folder Include="Features\BrandDocuments\Models\" />
     <Folder Include="Features\BrandDocuments\Profiles\" />
