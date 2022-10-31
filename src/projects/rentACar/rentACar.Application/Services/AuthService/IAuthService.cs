@@ -14,5 +14,6 @@ namespace rentACar.Application.Services.AuthService
         public Task RevokeRefreshToken(RefreshToken token, string ipAddress, string? reason = null,
                                string? replacedByToken = null);
         public Task<RefreshToken> RotateRefreshToken(User user, RefreshToken refreshToken, string ipAddress);
+        public Task<EmailAuthenticator> CreateEmailAuthenticator(User user);
     }
 }

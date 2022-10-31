@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Paging;
+using Core.Security.EmailAuthenticator;
 using Core.Security.Entities;
 using Core.Security.JWT;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,16 @@ namespace rentACar.Application.Services.AuthService
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
         private readonly ITokenHelper _tokenHelper;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IEmailAuthenticatorHelper _emailAuthenticatorHelper;
         private readonly TokenOptions _tokenOptions;
 
-        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration)
+        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IEmailAuthenticatorHelper emailAuthenticatorHelper)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
             _tokenHelper = tokenHelper;
             _refreshTokenRepository = refreshTokenRepository;
             _tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            _emailAuthenticatorHelper = emailAuthenticatorHelper;
         }
 
         public async Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken)
@@ -40,6 +43,19 @@ namespace rentACar.Application.Services.AuthService
 
             AccessToken accessToken = await _tokenHelper.CreateToken(user, operationClaims);
             return accessToken;
+        }
+
+        public async Task<EmailAuthenticator> CreateEmailAuthenticator(User user)
+        {
+            EmailAuthenticator emailAuthenticator = new()
+            {
+                UserId = user.Id,
+                ActivationKey = await _emailAuthenticatorHelper.CreateEmailActivationKey(),
+                IsVerified = false
+            };
+
+            return emailAuthenticator;
+
         }
 
         public async Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)

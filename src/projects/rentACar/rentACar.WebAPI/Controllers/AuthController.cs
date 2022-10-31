@@ -76,7 +76,6 @@ namespace rentACar.WebAPI.Controllers
             return Request.Cookies["refreshToken"];
         }
 
-
         private void setRefreshTokenToCookie(RefreshToken refreshToken)
         {
             CookieOptions cookieOptions = new()
