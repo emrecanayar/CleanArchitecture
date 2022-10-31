@@ -1,5 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
+using Core.Security.Enums;
 using Core.Security.Hashing;
 using rentACar.Application.Features.Auths.Constants;
 using rentACar.Application.Services.Repositories;
@@ -24,6 +25,13 @@ namespace rentACar.Application.Features.Auths.Rules
         public Task UserShouldBeExists(User? user)
         {
             if (user == null) throw new BusinessException(AuthMessages.UserDontExists);
+            return Task.CompletedTask;
+        }
+
+        public Task UserShouldNotBeHaveAuthenticator(User user)
+        {
+            if (user.AuthenticatorType != AuthenticatorType.None)
+                throw new BusinessException(AuthMessages.UserHaveAlreadyAAuthenticator);
             return Task.CompletedTask;
         }
 
