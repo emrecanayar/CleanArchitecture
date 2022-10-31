@@ -21,6 +21,7 @@ namespace rentACar.Persistence
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
             services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
 
             return services;
         }
