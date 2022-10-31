@@ -3,6 +3,7 @@ using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using rentACar.Application.Features.Auths.Commands.EnableEmailAuthenticator;
 using rentACar.Application.Features.Auths.Commands.Login;
 using rentACar.Application.Features.Auths.Commands.RefreshTokens;
 using rentACar.Application.Features.Auths.Commands.Register;
@@ -69,6 +70,19 @@ namespace rentACar.WebAPI.Controllers
             };
             RevokedTokenDto result = await Mediator.Send(revokeTokenCommand);
             return Ok(result);
+        }
+
+        [HttpGet("EnableEmailAuthenticator")]
+        public async Task<IActionResult> EnableEmailAuthenticator()
+        {
+            EnableEmailAuthenticatorCommand enableEmailAuthenticatorCommand = new()
+            {
+                UserId = getUserIdFromRequest(),
+                VerifyEmailUrlPrefix = $"{_configuration.APIDomain}/Auth/VerifyEmailAuthenticator"
+            };
+            await Mediator.Send(enableEmailAuthenticatorCommand);
+
+            return Ok();
         }
 
         private string? getRefreshTokenFromCookies()

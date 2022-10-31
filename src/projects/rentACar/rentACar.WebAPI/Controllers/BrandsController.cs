@@ -15,7 +15,6 @@ namespace rentACar.WebAPI.Controllers
 {
     public class BrandsController : BaseController
     {
-
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateBrandCommand createBrandCommand)
         {
@@ -39,7 +38,6 @@ namespace rentACar.WebAPI.Controllers
             return CreateActionResult(result);
         }
 
-
         [ServiceFilter(typeof(NotFoundFilter<Brand>))]
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetByIdBrandQuery getByIdBrandQuery)
@@ -47,6 +45,5 @@ namespace rentACar.WebAPI.Controllers
             CustomResponseDto<BrandGetByIdDto> result = await Mediator.Send(getByIdBrandQuery);
             return Ok(result);
         }
-
     }
 }
