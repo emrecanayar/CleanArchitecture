@@ -2,6 +2,7 @@
 using Core.Security.EmailAuthenticator;
 using Core.Security.Entities;
 using Core.Security.JWT;
+using Core.Security.OtpAuthenticator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using rentACar.Application.Services.Repositories;
@@ -14,15 +15,17 @@ namespace rentACar.Application.Services.AuthService
         private readonly ITokenHelper _tokenHelper;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly IEmailAuthenticatorHelper _emailAuthenticatorHelper;
+        private readonly IOtpAuthenticatorHelper _otpAuthenticatorHelper;
         private readonly TokenOptions _tokenOptions;
 
-        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IEmailAuthenticatorHelper emailAuthenticatorHelper)
+        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IEmailAuthenticatorHelper emailAuthenticatorHelper, IOtpAuthenticatorHelper otpAuthenticatorHelper)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
             _tokenHelper = tokenHelper;
             _refreshTokenRepository = refreshTokenRepository;
             _tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
             _emailAuthenticatorHelper = emailAuthenticatorHelper;
+            _otpAuthenticatorHelper = otpAuthenticatorHelper;
         }
 
         public async Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken)
@@ -55,7 +58,18 @@ namespace rentACar.Application.Services.AuthService
             };
 
             return emailAuthenticator;
+        }
 
+        public async Task<OtpAuthenticator> CreateOtpAuthenticator(User user)
+        {
+            OtpAuthenticator otpAuthenticator = new()
+            {
+                UserId = user.Id,
+                SecretKey = await _otpAuthenticatorHelper.GenerateSecretKey(),
+                IsVerified = false
+            };
+
+            return otpAuthenticator;
         }
 
         public async Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)
