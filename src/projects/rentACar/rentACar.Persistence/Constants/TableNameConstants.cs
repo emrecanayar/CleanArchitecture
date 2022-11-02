@@ -10,5 +10,6 @@
         public const string OPERATION_CLAIM = "OperationClaims";
         public const string USER_OPERATION_CLAIM = "UserOperationClaims";
         public const string REFRESH_TOKEN = "RefreshTokens";
+        public const string EMAIL_AUTHENTICATOR = "EmailAuthenticators";
     }
 }
