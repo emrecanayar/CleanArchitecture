@@ -21,6 +21,8 @@ using rentACar.Application.Services.DocumentService;
 using System.Reflection;
 using rentACar.Application.Services.UserService;
 using Core.Application.Pipelines.Transaction;
+using Core.Mailing.MailKitImplementations;
+using Core.Mailing;
 
 namespace rentACar.Application
 {
@@ -47,6 +49,7 @@ namespace rentACar.Application
             services.AddScoped<IUserService, UserManager>();
 
             services.AddSingleton<LoggerServiceBase, FileLogger>();
+            services.AddSingleton<IMailService, MailKitMailService>();
 
             services.AddStackExchangeRedisCache(options =>
             {
