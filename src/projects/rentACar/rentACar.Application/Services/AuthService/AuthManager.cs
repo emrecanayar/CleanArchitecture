@@ -34,6 +34,12 @@ namespace rentACar.Application.Services.AuthService
             return addedRefreshToken;
         }
 
+        public async Task<string> ConvertSecretKeyToString(byte[] secretKey)
+        {
+            string result = await _otpAuthenticatorHelper.ConvertSecretKeyToString(secretKey);
+            return result;
+        }
+
         public async Task<AccessToken> CreateAccessToken(User user)
         {
             IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(x => x.UserId == user.Id, include: x => x.Include(x => x.OperationClaim));

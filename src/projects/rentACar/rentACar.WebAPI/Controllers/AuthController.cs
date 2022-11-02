@@ -4,6 +4,7 @@ using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using rentACar.Application.Features.Auths.Commands.EnableEmailAuthenticator;
+using rentACar.Application.Features.Auths.Commands.EnableOtpAuthenticator;
 using rentACar.Application.Features.Auths.Commands.Login;
 using rentACar.Application.Features.Auths.Commands.RefreshTokens;
 using rentACar.Application.Features.Auths.Commands.Register;
@@ -83,6 +84,18 @@ namespace rentACar.WebAPI.Controllers
             await Mediator.Send(enableEmailAuthenticatorCommand);
 
             return Ok();
+        }
+
+        [HttpGet("EnableOtpAuthenticator")]
+        public async Task<IActionResult> EnableOtpAuthenticator()
+        {
+            EnableOtpAuthenticatorCommand enableOtpAuthenticatorCommand = new()
+            {
+                UserId = getUserIdFromRequest()
+            };
+            EnabledOtpAuthenticatorDto result = await Mediator.Send(enableOtpAuthenticatorCommand);
+
+            return Ok(result);
         }
 
         private string? getRefreshTokenFromCookies()

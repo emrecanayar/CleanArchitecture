@@ -54,5 +54,12 @@ namespace rentACar.Application.Features.Auths.Rules
                 throw new BusinessException(AuthMessages.InvalidRefreshToken);
             return Task.CompletedTask;
         }
+
+        public Task OtpAuthenticatorThatVerifiedShouldNotBeExists(OtpAuthenticator? otpAuthenticator)
+        {
+            if (otpAuthenticator is not null && otpAuthenticator.IsVerified)
+                throw new BusinessException(AuthMessages.AlreadyVerifiedOtpAuthenticatorIsExists);
+            return Task.CompletedTask;
+        }
     }
 }
