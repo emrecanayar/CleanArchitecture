@@ -10,6 +10,7 @@ using rentACar.Application.Features.Auths.Commands.RefreshTokens;
 using rentACar.Application.Features.Auths.Commands.Register;
 using rentACar.Application.Features.Auths.Commands.RevokeToken;
 using rentACar.Application.Features.Auths.Commands.VerifyEmailAuthenticator;
+using rentACar.Application.Features.Auths.Commands.VerifyOtpAuthenticator;
 using rentACar.Application.Features.Auths.Dtos;
 using rentACar.WebAPI.Controllers.Base;
 
@@ -106,6 +107,18 @@ namespace rentACar.WebAPI.Controllers
             await Mediator.Send(verifyEmailAuthenticatorCommand);
             return Ok();
         }
+
+        [HttpPost("VerifyOtpAuthenticator")]
+        public async Task<IActionResult> VerifyOtpAuthenticator(
+       [FromBody] string authenticatorCode)
+        {
+            VerifyOtpAuthenticatorCommand verifyEmailAuthenticatorCommand =
+                new() { UserId = getUserIdFromRequest(), ActivationCode = authenticatorCode };
+
+            await Mediator.Send(verifyEmailAuthenticatorCommand);
+            return Ok();
+        }
+
 
         private string? getRefreshTokenFromCookies()
         {

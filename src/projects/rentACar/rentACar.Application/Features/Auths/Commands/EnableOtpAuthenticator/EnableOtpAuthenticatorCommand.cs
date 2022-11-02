@@ -35,9 +35,6 @@ namespace rentACar.Application.Features.Auths.Commands.EnableOtpAuthenticator
                 await _authBusinessRules.UserShouldBeExists(user);
                 await _authBusinessRules.UserShouldNotBeHaveAuthenticator(user);
 
-                user.AuthenticatorType = AuthenticatorType.Otp;
-                await _userService.Update(user);
-
                 OtpAuthenticator? isExistsOtpAuthenticator = await _otpAuthenticatorRepository.GetAsync(x => x.UserId == request.UserId);
 
                 await _authBusinessRules.OtpAuthenticatorThatVerifiedShouldNotBeExists(isExistsOtpAuthenticator);

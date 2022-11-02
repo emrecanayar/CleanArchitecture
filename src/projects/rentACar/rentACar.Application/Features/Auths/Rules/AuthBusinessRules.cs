@@ -73,5 +73,11 @@ namespace rentACar.Application.Features.Auths.Rules
             if (emailAuthenticator.ActivationKey is null) throw new BusinessException(AuthMessages.EmailActivationKeyDontExists);
             return Task.CompletedTask;
         }
+
+        public Task OtpAuthenticatorShouldBeExists(OtpAuthenticator? otpAuthenticator)
+        {
+            if (otpAuthenticator is null) throw new BusinessException(AuthMessages.OtpAuthenticatorDontExists);
+            return Task.CompletedTask;
+        }
     }
 }
