@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rentACar.Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using rentACar.Persistence.Contexts;
 namespace rentACar.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102110845_OtpAuthenticator")]
+    partial class OtpAuthenticator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,10 +180,9 @@ namespace rentACar.Persistence.Migrations
                         .HasColumnName("ModifiedDate");
 
                     b.Property<byte[]>("SecretKey")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varbinary(256)")
-                        .HasColumnName("SecretKey");
+                        .HasColumnName("ActivationKey");
 
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
@@ -499,7 +500,7 @@ namespace rentACar.Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7047),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8842),
                             IsDeleted = false,
                             ModifiedBy = "",
                             Name = "BMW",
@@ -509,7 +510,7 @@ namespace rentACar.Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7049),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8843),
                             IsDeleted = false,
                             ModifiedBy = "",
                             Name = "Mercedes",
@@ -519,7 +520,7 @@ namespace rentACar.Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7050),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8845),
                             IsDeleted = false,
                             ModifiedBy = "",
                             Name = "Audi",
@@ -590,7 +591,7 @@ namespace rentACar.Persistence.Migrations
                             Id = 1,
                             BrandId = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(6885),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8689),
                             DocumentId = 1,
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -724,7 +725,7 @@ namespace rentACar.Persistence.Migrations
                             Id = 1,
                             BrandId = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7125),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8920),
                             DailyPrice = 1500m,
                             ImageUrl = "",
                             IsDeleted = false,
@@ -737,7 +738,7 @@ namespace rentACar.Persistence.Migrations
                             Id = 2,
                             BrandId = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7127),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8922),
                             DailyPrice = 1200m,
                             ImageUrl = "",
                             IsDeleted = false,
@@ -750,7 +751,7 @@ namespace rentACar.Persistence.Migrations
                             Id = 3,
                             BrandId = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2022, 11, 2, 14, 9, 55, 59, DateTimeKind.Local).AddTicks(7129),
+                            CreatedDate = new DateTime(2022, 11, 2, 14, 8, 45, 163, DateTimeKind.Local).AddTicks(8924),
                             DailyPrice = 1000m,
                             ImageUrl = "",
                             IsDeleted = false,
