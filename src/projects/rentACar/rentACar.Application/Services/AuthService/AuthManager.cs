@@ -1,4 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
+using Core.Mailing;
 using Core.Persistence.Paging;
 using Core.Security.EmailAuthenticator;
 using Core.Security.Entities;
@@ -20,9 +21,10 @@ namespace rentACar.Application.Services.AuthService
         private readonly IOtpAuthenticatorHelper _otpAuthenticatorHelper;
         private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
         private readonly IOtpAuthenticatorRepository _otpAuthenticatorRepository;
+        private readonly IMailService _mailService;
         private readonly TokenOptions _tokenOptions;
 
-        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IEmailAuthenticatorHelper emailAuthenticatorHelper, IOtpAuthenticatorHelper otpAuthenticatorHelper, IEmailAuthenticatorRepository emailAuthenticatorRepository, IOtpAuthenticatorRepository otpAuthenticatorRepository)
+        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository, IConfiguration configuration, IEmailAuthenticatorHelper emailAuthenticatorHelper, IOtpAuthenticatorHelper otpAuthenticatorHelper, IEmailAuthenticatorRepository emailAuthenticatorRepository, IOtpAuthenticatorRepository otpAuthenticatorRepository, IMailService mailService)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
             _tokenHelper = tokenHelper;
@@ -32,6 +34,7 @@ namespace rentACar.Application.Services.AuthService
             _otpAuthenticatorHelper = otpAuthenticatorHelper;
             _emailAuthenticatorRepository = emailAuthenticatorRepository;
             _otpAuthenticatorRepository = otpAuthenticatorRepository;
+            _mailService = mailService;
         }
 
         public async Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken)

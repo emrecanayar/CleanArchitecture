@@ -1,11 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Mailing.MailKitImplementations
 {
@@ -19,12 +14,24 @@ namespace Core.Mailing.MailKitImplementations
             _configuration = configuration;
             _mailSettings = configuration.GetSection("MailSettings").Get<MailSettings>();
         }
-        public void SendEmail(Mail mail)
+
+        public void SendMail(Mail mail)
         {
             MimeMessage email = new();
 
             email.From.Add(new MailboxAddress(_mailSettings.SenderFullName, _mailSettings.SenderEmail));
+
             email.To.Add(new MailboxAddress(mail.ToFullName, mail.ToEmail));
+
+            if (mail.CcList != null && mail.CcList.Any())
+            {
+                email.Cc.AddRange(mail.CcList);
+            }
+            if (mail.BccList != null && mail.BccList.Any())
+            {
+                email.Bcc.AddRange(mail.BccList);
+            }
+
             email.Subject = mail.Subject;
 
             BodyBuilder bodyBuilder = new()
@@ -41,7 +48,10 @@ namespace Core.Mailing.MailKitImplementations
 
             using SmtpClient smtp = new();
             smtp.Connect(_mailSettings.Server, _mailSettings.Port);
-            //smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+
+            if (_mailSettings.AuthenticationRequired)
+                smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+
             smtp.Send(email);
             smtp.Disconnect(true);
         }

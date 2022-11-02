@@ -8,6 +8,6 @@ namespace Core.Mailing
 {
     public interface IMailService
     {
-        void SendEmail(Mail mail);
+        void SendMail(Mail mail);
     }
 }
