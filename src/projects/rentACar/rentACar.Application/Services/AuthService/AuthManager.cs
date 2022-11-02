@@ -133,6 +133,11 @@ namespace rentACar.Application.Services.AuthService
             return newRefreshToken;
         }
 
+        public async Task SendAuthenticatorCode(User user)
+        {
+            if (user.AuthenticatorType is AuthenticatorType.Email) await sendAuthenticatorCodeWithEmail(user);
+        }
+
         public async Task VerifyAuthenticatorCode(User user, string authenticatorCode)
         {
             if (user.AuthenticatorType is AuthenticatorType.Email)

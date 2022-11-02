@@ -1,6 +1,7 @@
 ﻿using Core.Application.ResponseTypes.Concrete;
 using Core.Security.Dtos;
 using Core.Security.Entities;
+using Core.Security.Enums;
 using Core.Security.JWT;
 using MediatR;
 using rentACar.Application.Features.Auths.Dtos;
@@ -36,6 +37,19 @@ namespace rentACar.Application.Features.Auths.Commands.Login
                 await _authBusinessRules.UserPasswordShouldBeMatch(user.Id, request.UserForLoginDto.Password);
 
                 LoggedDto loggedDto = new();
+
+                if (user.AuthenticatorType is not AuthenticatorType.None)
+                {
+                    if (request.UserForLoginDto.AuthenticatorCode is null)
+                    {
+                        await _authService.SendAuthenticatorCode(user);
+                        loggedDto.RequiredAuthenticatorType = user.AuthenticatorType;
+                        return CustomResponseDto<LoggedDto>.Success((int)HttpStatusCode.OK, loggedDto, isSuccess: true);
+                    }
+
+                    await _authService.VerifyAuthenticatorCode(user, request.UserForLoginDto.AuthenticatorCode);
+                }
+
 
                 AccessToken createdAccessToken = await _authService.CreateAccessToken(user);
                 RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(user, request.IPAddress);
