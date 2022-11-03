@@ -24,6 +24,7 @@ using Core.Application.Pipelines.Transaction;
 using Core.Mailing.MailKitImplementations;
 using Core.Mailing;
 using rentACar.Application.Features.OperationClaims.Rules;
+using Core.Application.Pipelines.Limits;
 
 namespace rentACar.Application
 {
@@ -59,6 +60,7 @@ namespace rentACar.Application
             });
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLimitBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
