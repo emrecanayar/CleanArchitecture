@@ -26,6 +26,12 @@
     <Folder Include="Features\Models\Commands\" />
     <Folder Include="Features\Models\Constants\" />
     <Folder Include="Features\Models\Rules\" />
+    <Folder Include="Features\OperationClaims\Commands\" />
+    <Folder Include="Features\OperationClaims\Dtos\" />
+    <Folder Include="Features\OperationClaims\Models\" />
+    <Folder Include="Features\OperationClaims\Rules\" />
+    <Folder Include="Features\OperationClaims\Queries\" />
+    <Folder Include="Features\OperationClaims\Profiles\" />
   </ItemGroup>
 
   <ItemGroup>
