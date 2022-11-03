@@ -27,7 +27,6 @@
     <Folder Include="Features\Models\Constants\" />
     <Folder Include="Features\Models\Rules\" />
     <Folder Include="Features\OperationClaims\Models\" />
-    <Folder Include="Features\OperationClaims\Rules\" />
     <Folder Include="Features\OperationClaims\Queries\" />
   </ItemGroup>
 
