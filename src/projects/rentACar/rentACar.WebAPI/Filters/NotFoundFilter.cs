@@ -3,7 +3,6 @@ using Core.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using rentACar.Persistence.Contexts;
-using System.Linq.Expressions;
 
 namespace Core.CrossCuttingConcerns.Filters
 {

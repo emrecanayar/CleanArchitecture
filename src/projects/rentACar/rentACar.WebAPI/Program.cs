@@ -2,6 +2,7 @@ using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Filters;
 using Core.CrossCuttingConcerns.Logging.DbLog;
 using Core.Security;
+using Core.Security.ApplicationSecurity.Filters;
 using Core.Security.Encryption;
 using Core.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +17,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers()
+builder.Services.AddControllers(options => options.Filters.Add(new RequestLimitAttribute("RequestLimit")))
  .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
  .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
