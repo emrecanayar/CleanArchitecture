@@ -159,7 +159,13 @@ namespace rentACar.Application.Services.AuthService
             emailAuthenticator.ActivationKey = authenticatorCode;
             await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
 
-            //Mail Service Added
+            _mailService.SendMail(new Mail
+            {
+                ToEmail = user.Email,
+                ToFullName = $"{user.FirstName} {user.LastName}",
+                Subject = "Authenticator Code - RentACar",
+                TextBody = $"Enter your authenticator code: {authenticatorCode}"
+            });
         }
 
         private async Task verifyAuthenticatorCodeWithEmail(User user, string authenticatorCode)
