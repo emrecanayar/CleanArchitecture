@@ -19,11 +19,11 @@ namespace rentACar.Application.Features.Auths.Dtos
                 Data = new()
                 {
                     AccessToken = AccessToken,
-                    RefreshToken = new LoggedRefreshTokenDto
+                    RefreshToken = RefreshToken is not null ? new LoggedRefreshTokenDto
                     {
                         Token = RefreshToken.Token,
                         Expires = RefreshToken.Expires
-                    },
+                    } : null,
                     RequiredAuthenticatorType = RequiredAuthenticatorType
                 },
                 IsSuccess = true,
