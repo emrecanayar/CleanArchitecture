@@ -1,6 +1,6 @@
 ﻿namespace rentACar.Application.Features.OperationClaims.Constants
 {
-    public class OperationClaims
+    public static class OperationClaims
     {
         public const string OperationClaimAdd = "operationclaim.add";
         public const string OperationClaimUpdate = "operationclaim.update";
