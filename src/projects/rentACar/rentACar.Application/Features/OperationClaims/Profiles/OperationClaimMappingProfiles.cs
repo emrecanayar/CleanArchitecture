@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Security.Entities;
 using rentACar.Application.Features.OperationClaims.Commands.CreateOperationClaim;
+using rentACar.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using rentACar.Application.Features.OperationClaims.Dtos;
 
 namespace rentACar.Application.Features.OperationClaims.Profiles
@@ -11,6 +12,8 @@ namespace rentACar.Application.Features.OperationClaims.Profiles
         {
             CreateMap<OperationClaim, CreatedOperationClaimDto>().ReverseMap();
             CreateMap<OperationClaim, CreateOperationClaimCommand>().ReverseMap();
+            CreateMap<OperationClaim, UpdateOperationClaimCommand>().ReverseMap();
+            CreateMap<OperationClaim, UpdatedOperationClaimDto>().ReverseMap();
         }
     }
 }
