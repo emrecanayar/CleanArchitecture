@@ -6,14 +6,12 @@ using Moq;
 using rentACar.Application.Features.Brands.Commands.CreateBrand;
 using rentACar.Application.Features.Brands.Profiles;
 using rentACar.Application.Features.Brands.Queries.GetByIdBrand;
-using rentACar.Application.Features.Brands.Queries.GetListBrand;
 using rentACar.Application.Features.Brands.Queries.GetListBrandPaginate;
 using rentACar.Application.Features.Brands.Rules;
 using rentACar.Application.Services.Repositories;
 using Xunit;
 using static rentACar.Application.Features.Brands.Commands.CreateBrand.CreateBrandCommand;
 using static rentACar.Application.Features.Brands.Queries.GetByIdBrand.GetByIdBrandQuery;
-using static rentACar.Application.Features.Brands.Queries.GetListBrand.GetListBrandQuery;
 using static rentACar.Application.Features.Brands.Queries.GetListBrandPaginate.GetListBrandPaginateQuery;
 
 namespace Application.Tests.FeaturesTests.Brands
