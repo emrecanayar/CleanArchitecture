@@ -5,6 +5,7 @@ using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using MediatR;
+using rentACar.Application.Features;
 
 namespace Application.Features.Users.Queries.GetListUser;
 
@@ -15,19 +16,17 @@ public class GetListUserQuery : IRequest<UserListModel>
     public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, UserListModel>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
 
-        public GetListUserQueryHandler(IUserRepository userRepository, IMapper mapper)
+        public GetListUserQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _mapper = mapper;
         }
 
         public async Task<UserListModel> Handle(GetListUserQuery request, CancellationToken cancellationToken)
         {
             IPaginate<User> users = await _userRepository.GetListAsync(index: request.PageRequest.Page,
                                                                        size: request.PageRequest.PageSize);
-            UserListModel mappedUserListModel = _mapper.Map<UserListModel>(users);
+            UserListModel mappedUserListModel = ObjectMapper.Mapper.Map<UserListModel>(users);
             return mappedUserListModel;
         }
     }

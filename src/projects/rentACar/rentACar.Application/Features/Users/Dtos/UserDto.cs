@@ -1,3 +1,5 @@
+using Core.Persistence.ComplexTypes;
+
 namespace Application.Features.Users.Dtos;
 
 public class UserDto
@@ -6,5 +8,5 @@ public class UserDto
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
-    public bool Status { get; set; }
+    public RecordStatu Status { get; set; }
 }

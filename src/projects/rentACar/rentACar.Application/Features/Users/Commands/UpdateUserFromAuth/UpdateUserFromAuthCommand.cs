@@ -2,7 +2,6 @@
 using Application.Features.Users.Rules;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.Repositories;
-using AutoMapper;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using MediatR;

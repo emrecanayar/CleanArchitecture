@@ -26,7 +26,7 @@ public class CreateUserCommand : IRequest<CreatedUserDto>, ISecuredRequest
         private readonly IUserRepository _userRepository;
         private readonly UserBusinessRules _userBusinessRules;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper,
+        public CreateUserCommandHandler(IUserRepository userRepository,
                                         UserBusinessRules userBusinessRules)
         {
             _userRepository = userRepository;

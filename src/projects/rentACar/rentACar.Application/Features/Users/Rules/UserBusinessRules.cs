@@ -19,12 +19,12 @@ public class UserBusinessRules : BaseBusinessRules
     public async Task UserIdShouldExistWhenSelected(int id)
     {
         User? result = await _userRepository.GetAsync(b => b.Id == id);
-        if (result == null) throw new BusinessException(AuthMessages.UserDontExists);
+        if (result is null) throw new NotFoundException(AuthMessages.UserDontExists);
     }
 
     public Task UserShouldBeExist(User? user)
     {
-        if (user is null) throw new BusinessException(AuthMessages.UserDontExists);
+        if (user is null) throw new NotFoundException(AuthMessages.UserDontExists);
         return Task.CompletedTask;
     }
 
