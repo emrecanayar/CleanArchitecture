@@ -25,6 +25,19 @@ namespace rentACar.WebAPI.Controllers
             _configuration = configuration.GetSection("WebAPIConfiguration").Get<WebAPIConfiguration>();
         }
 
+        /// <summary>
+        /// The Login API is used authenticate a user in CleanArchitecture. The issuer of the One Time Password will dictate if a JWT or a Refresh Token may be issued in the API response.
+        /// </summary>
+        ///  <remarks>
+        ///     POST  api/Auth/Login
+        ///     {
+        ///         "email":"emrecan.ayar@hotmail.com",
+        ///         "password":"test.password",
+        ///         "authenticatorCode":"NPHMFrgLYKVD3zFeW3BclLi2DvPz2wh+1vrK5zh+9D7jp9tWmTT2pSNT1ZDk33pyY7BnE4Oz70doAL5coy1Ujg=="
+        ///     }
+        /// </remarks>
+        /// <param name="userForLoginDto">Email Address,Password,Code</param>
+        /// <returns></returns>
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
@@ -36,7 +49,6 @@ namespace rentACar.WebAPI.Controllers
 
             return Ok(result.Data.CreateResponseDto());
         }
-
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {

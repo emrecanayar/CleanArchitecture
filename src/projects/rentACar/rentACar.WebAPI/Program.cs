@@ -12,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using Prometheus;
 using rentACar.Application;
 using rentACar.Persistence;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -54,6 +56,12 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSwaggerGen(opt =>
 {
+    opt.CustomSchemaIds(type => type.ToString());
+    opt.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Clean Architecture Backend",
+        Version = "v1"
+    });
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -72,14 +80,25 @@ builder.Services.AddSwaggerGen(opt =>
             new string[] { }
         }
     });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    opt.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(x =>
+    {
+        x.SerializeAsV2 = true;
+    });
+    app.UseSwaggerUI(options =>
+    {
+        options.DocExpansion(DocExpansion.None);
+        options.DefaultModelExpandDepth(-1);
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clean Architecture v1");
+    });
 }
 
 //if (app.Environment.IsProduction())
