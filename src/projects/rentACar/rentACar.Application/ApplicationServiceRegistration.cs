@@ -25,6 +25,7 @@ using Core.Mailing.MailKitImplementations;
 using Core.Mailing;
 using rentACar.Application.Features.OperationClaims.Rules;
 using Application.Features.UserOperationClaims.Rules;
+using Application.Features.Users.Rules;
 
 namespace rentACar.Application
 {
@@ -40,6 +41,7 @@ namespace rentACar.Application
             services.AddScoped<DocumentBusinessRules>();
             services.AddScoped<BrandDocumentBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<UserBusinessRules>();
             services.AddScoped<OperationClaimBusinessRules>();
             services.AddScoped<UserOperationClaimBusinessRules>();
 

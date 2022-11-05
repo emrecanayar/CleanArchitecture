@@ -1,4 +1,5 @@
 ﻿using Application.Features.UserOperationClaims.Profiles;
+using Application.Features.Users.Profiles;
 using AutoMapper;
 using rentACar.Application.Features.Auths.Profiles;
 using rentACar.Application.Features.Brands.Profiles;
@@ -18,6 +19,7 @@ namespace rentACar.Application.Features
                 configuration.AddProfile<ModelMappingProfiles>();
                 configuration.AddProfile<DocumentMappingProfiles>();
                 configuration.AddProfile<AuthMappingProfiles>();
+                configuration.AddProfile<UserMappingProfiles>();
                 configuration.AddProfile<OperationClaimMappingProfiles>();
                 configuration.AddProfile<UserOperationClaimMappingProfiles>();
             });

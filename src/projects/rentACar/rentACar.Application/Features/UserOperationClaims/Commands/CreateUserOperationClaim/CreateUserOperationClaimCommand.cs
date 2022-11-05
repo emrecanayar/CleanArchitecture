@@ -7,6 +7,7 @@ using Core.Security.Entities;
 using MediatR;
 using static Application.Features.UserOperationClaims.Constants.OperationClaims;
 using static rentACar.Domain.Constants.OperationClaims;
+using rentACar.Application.Features;
 
 namespace Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
 
@@ -26,22 +27,20 @@ public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClai
         private readonly UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
 
         public CreateUserOperationClaimCommandHandler(IUserOperationClaimRepository userOperationClaimRepository,
-                                                      IMapper mapper,
                                                       UserOperationClaimBusinessRules userOperationClaimBusinessRules)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
-            _mapper = mapper;
             _userOperationClaimBusinessRules = userOperationClaimBusinessRules;
         }
 
         public async Task<CreatedUserOperationClaimDto> Handle(CreateUserOperationClaimCommand request,
                                                                CancellationToken cancellationToken)
         {
-            UserOperationClaim mappedUserOperationClaim = _mapper.Map<UserOperationClaim>(request);
+            UserOperationClaim mappedUserOperationClaim = ObjectMapper.Mapper.Map<UserOperationClaim>(request);
             UserOperationClaim createdUserOperationClaim =
                 await _userOperationClaimRepository.AddAsync(mappedUserOperationClaim);
             CreatedUserOperationClaimDto createdUserOperationClaimDto =
-                _mapper.Map<CreatedUserOperationClaimDto>(createdUserOperationClaim);
+                ObjectMapper.Mapper.Map<CreatedUserOperationClaimDto>(createdUserOperationClaim);
             return createdUserOperationClaimDto;
         }
     }
