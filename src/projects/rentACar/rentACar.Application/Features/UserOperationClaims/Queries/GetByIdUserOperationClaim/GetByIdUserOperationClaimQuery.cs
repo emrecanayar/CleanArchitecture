@@ -4,6 +4,7 @@ using rentACar.Application.Services.Repositories;
 using AutoMapper;
 using Core.Security.Entities;
 using MediatR;
+using rentACar.Application.Features;
 
 namespace Application.Features.UserOperationClaims.Queries.GetByIdUserOperationClaim;
 
@@ -15,15 +16,12 @@ public class GetByIdUserOperationClaimQuery : IRequest<UserOperationClaimDto>
         GetByIdUserOperationClaimQueryHandler : IRequestHandler<GetByIdUserOperationClaimQuery, UserOperationClaimDto>
     {
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
-        private readonly IMapper _mapper;
         private readonly UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
 
         public GetByIdUserOperationClaimQueryHandler(IUserOperationClaimRepository userOperationClaimRepository,
-                                                     IMapper mapper,
                                                      UserOperationClaimBusinessRules userOperationClaimBusinessRules)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
-            _mapper = mapper;
             _userOperationClaimBusinessRules = userOperationClaimBusinessRules;
         }
 
@@ -35,7 +33,7 @@ public class GetByIdUserOperationClaimQuery : IRequest<UserOperationClaimDto>
 
             UserOperationClaim? userOperationClaim =
                 await _userOperationClaimRepository.GetAsync(b => b.Id == request.Id);
-            UserOperationClaimDto userOperationClaimDto = _mapper.Map<UserOperationClaimDto>(userOperationClaim);
+            UserOperationClaimDto userOperationClaimDto = ObjectMapper.Mapper.Map<UserOperationClaimDto>(userOperationClaim);
             return userOperationClaimDto;
         }
     }

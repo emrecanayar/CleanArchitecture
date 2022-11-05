@@ -9,9 +9,9 @@ using Core.Security.Entities;
 
 namespace Application.Features.UserOperationClaims.Profiles;
 
-public class MappingProfiles : Profile
+public class UserOperationClaimMappingProfiles : Profile
 {
-    public MappingProfiles()
+    public UserOperationClaimMappingProfiles()
     {
         CreateMap<UserOperationClaim, CreateUserOperationClaimCommand>().ReverseMap();
         CreateMap<UserOperationClaim, CreatedUserOperationClaimDto>().ReverseMap();

@@ -17,11 +17,10 @@ namespace rentACar.Application.Features.OperationClaims.Queries.GetByIdOperation
             private readonly IMapper _mapper;
             private readonly OperationClaimBusinessRules _operationClaimBusinessRules;
 
-            public GetByIdOperationClaimQueryHandler(IOperationClaimRepository operationClaimRepository, IMapper mapper,
+            public GetByIdOperationClaimQueryHandler(IOperationClaimRepository operationClaimRepository,
                                                      OperationClaimBusinessRules operationClaimBusinessRules)
             {
                 _operationClaimRepository = operationClaimRepository;
-                _mapper = mapper;
                 _operationClaimBusinessRules = operationClaimBusinessRules;
             }
 
@@ -32,7 +31,7 @@ namespace rentACar.Application.Features.OperationClaims.Queries.GetByIdOperation
                 await _operationClaimBusinessRules.OperationClaimIdShouldExistWhenSelected(request.Id);
 
                 OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(b => b.Id == request.Id);
-                OperationClaimDto operationClaimDto = _mapper.Map<OperationClaimDto>(operationClaim);
+                OperationClaimDto operationClaimDto = ObjectMapper.Mapper.Map<OperationClaimDto>(operationClaim);
                 return operationClaimDto;
             }
         }
