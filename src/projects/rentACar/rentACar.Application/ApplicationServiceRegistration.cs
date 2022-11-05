@@ -24,6 +24,7 @@ using Core.Application.Pipelines.Transaction;
 using Core.Mailing.MailKitImplementations;
 using Core.Mailing;
 using rentACar.Application.Features.OperationClaims.Rules;
+using Application.Features.UserOperationClaims.Rules;
 
 namespace rentACar.Application
 {
@@ -40,6 +41,7 @@ namespace rentACar.Application
             services.AddScoped<BrandDocumentBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<OperationClaimBusinessRules>();
+            services.AddScoped<UserOperationClaimBusinessRules>();
 
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
