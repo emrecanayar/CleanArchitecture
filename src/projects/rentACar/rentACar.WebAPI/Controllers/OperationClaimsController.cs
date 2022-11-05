@@ -3,12 +3,20 @@ using rentACar.Application.Features.OperationClaims.Commands.CreateOperationClai
 using rentACar.Application.Features.OperationClaims.Commands.DeleteOperationClaim;
 using rentACar.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using rentACar.Application.Features.OperationClaims.Dtos;
+using rentACar.Application.Features.OperationClaims.Queries.GetByIdOperationClaim;
 using rentACar.WebAPI.Controllers.Base;
 
 namespace rentACar.WebAPI.Controllers
 {
     public class OperationClaimsController : BaseController
     {
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdOperationClaimQuery getByIdOperationClaimQuery)
+        {
+            OperationClaimDto result = await Mediator.Send(getByIdOperationClaimQuery);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateOperationClaimCommand createOperationClaimCommand)
         {
