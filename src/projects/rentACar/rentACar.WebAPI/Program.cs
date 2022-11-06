@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Prometheus;
 using rentACar.Application;
+using rentACar.Infrastructure;
 using rentACar.Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
@@ -26,6 +27,7 @@ builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddSecurityServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 
