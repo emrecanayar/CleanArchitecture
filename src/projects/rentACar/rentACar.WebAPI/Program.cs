@@ -1,3 +1,5 @@
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Filters;
 using Core.CrossCuttingConcerns.Logging.DbLog;
@@ -17,6 +19,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using rentACar.Persistence.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +35,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.Configure<LogDatabaseSettings>(builder.Configuration.GetSection("LogDatabaseSettings"));
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepositoryModule()));
+
 builder.Services.AddSingleton<ILogDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<LogDatabaseSettings>>().Value;

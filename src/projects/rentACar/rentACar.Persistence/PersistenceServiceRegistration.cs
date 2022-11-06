@@ -13,17 +13,6 @@ namespace rentACar.Persistence
         {
             services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("RentACarConnectionString")));
 
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<IModelRepository, ModelRepository>();
-            services.AddScoped<IDocumentRepository, DocumentRepository>();
-            services.AddScoped<IBrandDocumentRepository, BrandDocumentRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
-            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
-            services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
-            services.AddScoped<IOtpAuthenticatorRepository, OtpAuthenticatorRepository>();
-
             return services;
         }
     }
