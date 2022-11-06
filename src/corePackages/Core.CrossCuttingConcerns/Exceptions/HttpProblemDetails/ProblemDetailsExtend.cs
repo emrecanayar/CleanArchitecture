@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Core.CrossCuttingConcerns.Exceptions
+namespace Core.CrossCuttingConcerns.Exceptions.HttpProblemDetails
 {
     public class ProblemDetailsExtend : ProblemDetails
     {

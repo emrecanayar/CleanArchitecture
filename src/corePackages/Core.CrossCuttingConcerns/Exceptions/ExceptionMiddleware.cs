@@ -1,17 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using FluentValidation;
-using System.Net;
+﻿using Core.CrossCuttingConcerns.Exceptions.Handlers;
+using Core.CrossCuttingConcerns.Logging;
+using Core.CrossCuttingConcerns.Logging.SeriLog;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Core.CrossCuttingConcerns.Exceptions
 {
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly HttpExceptionHandler _httpExceptionHandler = new();
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly LoggerServiceBase _loggerService;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, IHttpContextAccessor contextAccessor, LoggerServiceBase loggerService)
         {
             _next = next;
+            _contextAccessor = contextAccessor;
+            _loggerService = loggerService;
         }
 
         public async Task Invoke(HttpContext context)
@@ -22,99 +28,38 @@ namespace Core.CrossCuttingConcerns.Exceptions
             }
             catch (Exception exception)
             {
-
-                await HandleExceptionAsync(context, exception);
+                await logException(context, exception);
+                await handleExceptionAsync(context.Response, exception);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task handleExceptionAsync(HttpResponse response, Exception exception)
         {
-            context.Response.ContentType = "application/json";
-
-            if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
-            if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
-            if (exception.GetType() == typeof(AuthorizationException)) return CreateAuthorizationException(context, exception);
-            if (exception.GetType() == typeof(NotFoundException)) return CreateNotFoundException(context, exception);
-
-            return CreateInternalException(context, exception);
+            response.ContentType = "application/json";
+            _httpExceptionHandler.Response = response;
+            return _httpExceptionHandler.HandleExceptionAsync(exception);
         }
 
-        private Task CreateInternalException(HttpContext context, Exception exception)
+        private Task logException(HttpContext context, Exception exception)
         {
-            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
-
-            return context.Response.WriteAsync(new ProblemDetailsExtend
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                IsSuccess = false,
-                Type = "https://example.com/probs/internal",
-                Title = "Internal exception",
-                Detail = exception.Message,
-                Instance = "",
-            }.ToString());
-        }
-
-        private Task CreateAuthorizationException(HttpContext context, Exception exception)
+            List<LogParameter> logParameters = new()
         {
-            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
-
-            return context.Response.WriteAsync(new AuthorizationProblemDetails
+            new LogParameter
             {
-                Status = StatusCodes.Status401Unauthorized,
-                IsSuccess = false,
-                Type = "https://example.com/probs/authorization",
-                Title = "Authorization exception",
-                Detail = exception.Message,
-                Instance = "",
-            }.ToString());
-        }
+                Type = context.GetType().Name,
+                Value = context
+            }
+        };
 
-        private Task CreateBusinessException(HttpContext context, Exception exception)
-        {
-            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-
-            return context.Response.WriteAsync(new BusinessProblemDetails
+            LogDetail logDetail = new()
             {
-                Status = StatusCodes.Status400BadRequest,
-                IsSuccess = false,
-                Type = "https://example.com/probs/business",
-                Title = "Business exception",
-                Detail = exception.Message,
-                Instance = "",
-            }.ToString());
-        }
+                MethodName = _next.Method.Name,
+                Parameters = logParameters,
+                User = _contextAccessor.HttpContext?.User.Identity?.Name ?? "?"
+            };
 
-        private Task CreateValidationException(HttpContext context, Exception exception)
-        {
-            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-            object errors = ((ValidationException)exception).Errors;
-
-            return context.Response.WriteAsync(new ValidationProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                IsSuccess = false,
-                Type = "https://example.com/probs/validation",
-                Title = "Validation error(s)",
-                Detail = "",
-                Instance = "",
-                Errors = errors
-            }.ToString());
-        }
-
-        private Task CreateNotFoundException(HttpContext context, Exception exception)
-        {
-            context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.NotFound);
-
-            return context.Response.WriteAsync(new ValidationProblemDetails
-            {
-                Status = StatusCodes.Status400BadRequest,
-                IsSuccess = false,
-                Type = "https://example.com/probs/validation",
-                Title = "NotFound exception",
-                Detail = exception.Message,
-                Instance = "",
-
-            }.ToString());
+            _loggerService.Info(JsonConvert.SerializeObject(logDetail));
+            return Task.CompletedTask;
         }
     }
 }
