@@ -1,8 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions.Handlers;
-using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Logging.SeriLog;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 
 namespace Core.CrossCuttingConcerns.Exceptions
 {
@@ -28,7 +26,7 @@ namespace Core.CrossCuttingConcerns.Exceptions
             }
             catch (Exception exception)
             {
-                await logException(context, exception);
+                //await logException(context, exception);
                 await handleExceptionAsync(context.Response, exception);
             }
         }
@@ -40,26 +38,26 @@ namespace Core.CrossCuttingConcerns.Exceptions
             return _httpExceptionHandler.HandleExceptionAsync(exception);
         }
 
-        private Task logException(HttpContext context, Exception exception)
-        {
-            List<LogParameter> logParameters = new()
-        {
-            new LogParameter
-            {
-                Type = context.GetType().Name,
-                Value = context
-            }
-        };
+        //private Task logException(HttpContext context, Exception exception)
+        //{
+        //    List<LogParameter> logParameters = new()
+        //{
+        //    new LogParameter
+        //    {
+        //        Type = context.GetType().Name,
+        //        Value = context
+        //    }
+        //};
 
-            LogDetail logDetail = new()
-            {
-                MethodName = _next.Method.Name,
-                Parameters = logParameters,
-                User = _contextAccessor.HttpContext?.User.Identity?.Name ?? "?"
-            };
+        //    LogDetail logDetail = new()
+        //    {
+        //        MethodName = _next.Method.Name,
+        //        Parameters = logParameters,
+        //        User = _contextAccessor.HttpContext?.User.Identity?.Name ?? "?"
+        //    };
 
-            _loggerService.Info(JsonConvert.SerializeObject(logDetail));
-            return Task.CompletedTask;
-        }
+        //    _loggerService.Info(JsonConvert.SerializeObject(logDetail));
+        //    return Task.CompletedTask;
+        //}
     }
 }

@@ -104,6 +104,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //if (app.Environment.IsProduction())
+app.UseRequestResponseLoggingMiddleware();
 app.UseConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
@@ -112,7 +113,6 @@ app.UseAuthorization();
 
 app.UseMetricServer();
 app.UseHttpMetrics();
-app.UseRequestResponseLoggingMiddleware();
 app.MapMetrics();
 app.MapControllers();
 
