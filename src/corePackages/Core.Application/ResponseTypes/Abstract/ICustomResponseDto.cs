@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Application.ResponseTypes.Abstract
+﻿namespace Core.Application.ResponseTypes.Abstract
 {
     public interface ICustomResponseDto<T>
     {
