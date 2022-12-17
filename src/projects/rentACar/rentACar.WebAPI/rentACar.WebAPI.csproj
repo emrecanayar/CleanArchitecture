@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -26,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\corePackages\Core.BackgroundJob\Core.BackgroundJob.csproj" />
     <ProjectReference Include="..\rentACar.Infrastructure\rentACar.Infrastructure.csproj" />
     <ProjectReference Include="..\rentACar.Persistence\rentACar.Persistence.csproj" />
   </ItemGroup>

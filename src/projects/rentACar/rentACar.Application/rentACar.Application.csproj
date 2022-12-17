@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\corePackages\Core.Application\Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.BackgroundJob\Core.BackgroundJob.csproj" />
     <ProjectReference Include="..\..\..\corePackages\Core.Integration\Core.Integration.csproj" />
     <ProjectReference Include="..\..\..\corePackages\Core.Mailing\Core.Mailing.csproj" />
     <ProjectReference Include="..\rentACar.Domain\rentACar.Domain.csproj" />

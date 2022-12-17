@@ -2,11 +2,6 @@
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
 using Core.Integration.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Integration.Clients
 {
@@ -45,7 +40,9 @@ namespace Core.Integration.Clients
             this(new ApiSession { ApiUrl = apiUrl, UserAgent = userAgent, Credentials = credentials })
         { }
 
-        public JsonPlaceHolderClient(ApiSession apiSession) : this(apiSession, new JsonSerializer()) { }
+        public JsonPlaceHolderClient(ApiSession apiSession) : this(apiSession, new JsonSerializer())
+        {
+        }
 
         public JsonPlaceHolderClient(ApiSession apiSession, IJsonSerializer jsonSerializer)
         {
@@ -56,7 +53,6 @@ namespace Core.Integration.Clients
             Post = new PostStore(apiSession, jsonSerializer);
             ApiSession = apiSession;
         }
-
 
         public static string ApiUrlFromEnvironment(ApiEnvironment environment)
         {
@@ -73,6 +69,4 @@ namespace Core.Integration.Clients
             return $"JsonPlaceHolder .NET SDK/{Constants.Version} (+JsonPlaceHolder)";
         }
     }
-
-
 }

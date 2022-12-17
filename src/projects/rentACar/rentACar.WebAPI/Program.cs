@@ -20,6 +20,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using rentACar.Persistence.Modules;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.Configure<LogDatabaseSettings>(builder.Configuration.GetSection("LogDatabaseSettings"));
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -117,9 +119,26 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseHangfireDashboard("/job", new DashboardOptions
+{
+    DashboardTitle = "Clean Architecture Hangfire DashBoard",
+    AppPath = "/Home/HangfireAbout",
+
+});
+
+app.UseHangfireServer(new BackgroundJobServerOptions
+{
+    SchedulePollingInterval = TimeSpan.FromSeconds(30),
+
+    WorkerCount = Environment.ProcessorCount * 5
+});
+GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 7 });
+
+
 app.UseMetricServer();
 app.UseHttpMetrics();
 app.MapMetrics();
 app.MapControllers();
+
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using Core.Persistence.ComplexTypes;
+﻿using Core.BackgroundJob.Schedules;
+using Core.Persistence.ComplexTypes;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Enums;
@@ -30,6 +31,7 @@ namespace rentACar.Application.Features.Auths.Commands.Register
                 _authService = authService;
             }
 
+            [Obsolete]
             public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 await _authBusinessRules.EmailCantNotBeDuplicatedWhenRegistered(request.UserForRegister.Email);

@@ -1,4 +1,5 @@
 ﻿using Core.Application.ResponseTypes.Concrete;
+using Core.BackgroundJob.Schedules;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,7 @@ namespace rentACar.WebAPI.Controllers
 
             RegisteredDto result = await Mediator.Send(registerCommand);
             setRefreshTokenToCookie(result.RefreshToken);
+            DelayedJobs.SendMailRegisterJobs(1);
             return Created("", result.AccessToken);
         }
 

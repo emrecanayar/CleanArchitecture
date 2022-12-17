@@ -1,14 +1,9 @@
 ﻿using Core.Integration.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Core.Integration.Serialization;
+using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Core.Integration.Base
 {
@@ -65,17 +60,14 @@ namespace Core.Integration.Base
             return await DeserializeOrDefault<T>(result).ConfigureAwait(false);
         }
 
-
         public async Task<T> Put<T>(string url,
             object data = null,
             IDictionary<string, string> headers = null,
             Ref<HttpResponseMessage> outResponse = null)
         {
-
             var result = await MakeRequest(HttpMethod.Put, url, data, headers, outResponse).ConfigureAwait(false);
             return await DeserializeOrDefault<T>(result).ConfigureAwait(false);
         }
-
 
         public Task Put(string url,
             object data = null,
@@ -84,7 +76,6 @@ namespace Core.Integration.Base
         {
             return MakeRequest(HttpMethod.Put, url, data, headers, outResponse);
         }
-
 
         public async Task<T> Get<T>(string url,
             IDictionary<string, string> headers = null,
@@ -100,7 +91,6 @@ namespace Core.Integration.Base
         {
             return MakeRequest(HttpMethod.Get, url, null, headers, response);
         }
-
 
         public async Task<Stream> GetStream(string url)
         {
@@ -180,21 +170,25 @@ namespace Core.Integration.Base
             client.DefaultRequestHeaders.ExpectContinue = false;
             return client;
         }
+
         private HttpContent GetMessageContent(object data)
         {
             if (data == null) return null;
 
             return new StringContent(Serialize(data), Encoding.UTF8, "application/json");
         }
+
         private async Task<T> DeserializeOrDefault<T>(HttpResponseMessage result)
         {
             var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
             return !string.IsNullOrEmpty(content) ? _jsonSerializer.Deserialize<T>(content) : default(T);
         }
+
         private string Serialize(object data)
         {
             return _jsonSerializer.Serialize(data);
         }
+
         private static async Task ThrowIfError(HttpResponseMessage result)
         {
             if (!result.IsSuccessStatusCode)
