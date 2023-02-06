@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Mailing
+﻿namespace Core.Mailing
 {
     public class MailSettings
     {
@@ -15,6 +9,9 @@ namespace Core.Mailing
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool AuthenticationRequired { get; set; }
+        public string? DkimPrivateKey { get; set; }
+        public string? DkimSelector { get; set; }
+        public string? DomainName { get; set; }
 
         public MailSettings()
         {
@@ -22,7 +19,7 @@ namespace Core.Mailing
         }
 
         public MailSettings(string server, int port, string senderFullName, string senderEmail, string userName,
-                            string password, bool authenticationRequired = false)
+                            string password, bool authenticationRequired = false, string? dkimPrivateKey = null, string? dkimSelector = null, string? domainName = null)
         {
             Server = server;
             Port = port;
@@ -31,6 +28,9 @@ namespace Core.Mailing
             UserName = userName;
             Password = password;
             AuthenticationRequired = authenticationRequired;
+            DkimPrivateKey = dkimPrivateKey;
+            DkimSelector = dkimSelector;
+            DomainName = domainName;
         }
     }
 }

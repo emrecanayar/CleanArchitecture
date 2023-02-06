@@ -1,4 +1,5 @@
 ﻿using Core.Mailing;
+using MimeKit;
 
 namespace Core.BackgroundJob.Managers.DelayedJobs
 {
@@ -13,7 +14,11 @@ namespace Core.BackgroundJob.Managers.DelayedJobs
 
         public void Process(int userId)
         {
-            _mailService.SendMail(new Mail { TextBody = userId.ToString(), ToEmail = "emrecan.ayar@hotmail.com", Subject = "HangFire Test" });
+            var toEmailList = new List<MailboxAddress>
+                {
+                new("Emre Can Ayar","emrecan.ayar@hotmail.com")
+                };
+            _mailService.SendMail(new Mail { TextBody = userId.ToString(), ToList = toEmailList, Subject = "HangFire Test" });
         }
     }
 }
