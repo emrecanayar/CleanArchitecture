@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Core.Helpers.Helpers
 {
@@ -46,7 +41,6 @@ namespace Core.Helpers.Helpers
             while (url.IndexOf("--") > -1)
                 url = url.Replace("--", "-");
             return url;
-
         }
     }
 }

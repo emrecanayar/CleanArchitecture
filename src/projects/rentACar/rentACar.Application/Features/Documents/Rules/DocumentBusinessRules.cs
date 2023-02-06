@@ -3,7 +3,6 @@ using Core.Helpers.Helpers;
 using Core.Persistence.ComplexTypes;
 using Core.Persistence.Paging;
 using Core.Security.Constants;
-using Core.Security.Hashing;
 using rentACar.Application.Features.Documents.Dtos;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
@@ -34,7 +33,7 @@ namespace rentACar.Application.Features.Documents.Rules
         public async Task<Document> AddOrUpdateDocument(DocumentDto documentDto)
         {
             var documentData = JsonSerializer.Serialize(documentDto);
-            var encryptedPath = HashingHelper.AESEncrypt(documentData, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
+            var encryptedPath = Core.Helpers.Helpers.HashingHelper.AESEncrypt(documentData, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
             var document = new Document
             {
                 Id = documentDto.Id,

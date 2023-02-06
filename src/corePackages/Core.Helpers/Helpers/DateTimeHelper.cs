@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Helpers.Helpers
 {
@@ -104,7 +99,6 @@ namespace Core.Helpers.Helpers
             return GetDateFormat(CultureInfo.CurrentCulture);
         }
 
-
         public static DateTimeFormatInfo GetDateFormat(CultureInfo culture)
         {
             if (culture.Calendar is GregorianCalendar)
@@ -134,7 +128,6 @@ namespace Core.Helpers.Helpers
                         }
                     }
                 }
-
 
                 if (foundCal == null)
                 {
@@ -234,4 +227,3 @@ namespace Core.Helpers.Helpers
         }
     }
 }
-

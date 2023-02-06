@@ -45,6 +45,23 @@ namespace Core.Helpers.Helpers
             return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : value.ToString();
         }
 
+        public static Dictionary<int, string> GetEnumValuesAndNames(Type enumType)
+        {
+            if (!enumType.IsEnum)
+                throw new ArgumentException("enumType must be an Enum type");
+
+            Dictionary<int, string> dictionary = new Dictionary<int, string>();
+
+            foreach (int value in Enum.GetValues(enumType))
+            {
+                string name = Enum.GetName(enumType, value);
+                dictionary.Add(value, name);
+            }
+
+            return dictionary;
+        }
+
+
         private static string LookupResource(Type resourceManagerProvider, string resourceKey)
         {
             var resourceKeyProperty = resourceManagerProvider.GetProperty(resourceKey,

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Helpers.Helpers
+﻿namespace Core.Helpers.Helpers
 {
     public static class Mapper
     {
         #region Source Type Methods
+
         public static IEnumerable<TDestination> ToMap<TSource, TDestination>(this IEnumerable<TSource> sourceList)
         {
             return sourceList.Select(source => source.ToMap<TSource, TDestination>());
@@ -32,9 +27,11 @@ namespace Core.Helpers.Helpers
             var destinationInstance = ValuesUpdateMap(source, destination);
             return destinationInstance;
         }
-        #endregion
+
+        #endregion Source Type Methods
 
         #region Source Typeless Methods
+
         public static IEnumerable<TDestination> ToMap<TDestination>(this IEnumerable<object> sourceList)
         {
             return sourceList.Select(source => source.ToMap<TDestination>());
@@ -58,9 +55,11 @@ namespace Core.Helpers.Helpers
             var destinationInstance = ValuesUpdateMap(source, destination);
             return destinationInstance;
         }
-        #endregion
+
+        #endregion Source Typeless Methods
 
         #region Private Methods
+
         private static TDestination NewInstanceMap<TDestination>(object source)
         {
             var entityProperties = source.GetType().GetProperties();
@@ -124,9 +123,11 @@ namespace Core.Helpers.Helpers
             }
             catch (MissingMethodException) { return true; }
         }
-        #endregion
+
+        #endregion Private Methods
 
         #region Object Instance Helper Methods
+
         public static TType GetInstanceByNameOrType<TType>(string entityQualifiedName)
         {
             var destinationInstance = GetInstanceByType<TType>();
@@ -149,6 +150,7 @@ namespace Core.Helpers.Helpers
         {
             return Activator.CreateInstance(Type.GetType(entityQualifiedName));
         }
-        #endregion
+
+        #endregion Object Instance Helper Methods
     }
 }

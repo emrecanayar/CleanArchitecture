@@ -1,6 +1,5 @@
 ﻿using Core.Helpers.Helpers;
 using Core.Security.Constants;
-using Core.Security.Hashing;
 using rentACar.Application.Features.Documents.Dtos;
 using rentACar.Application.Services.Repositories;
 using System.Text.Json;
@@ -21,7 +20,7 @@ namespace rentACar.Application.Services.DocumentService
             var document = await _documentRepository.GetAsync(x => x.Token == token);
             if (document == null) return null;
 
-            var decryptedDocumentData = HashingHelper.AESDecrypt(document.Token, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
+            var decryptedDocumentData = Core.Helpers.Helpers.HashingHelper.AESDecrypt(document.Token, SecurityKeyConstant.DOCUMENT_SECURITY_KEY);
 
             var documentDto = JsonSerializer.Deserialize<DocumentDto>(decryptedDocumentData);
 
