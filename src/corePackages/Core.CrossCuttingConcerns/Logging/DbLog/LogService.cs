@@ -11,7 +11,6 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
         private readonly ILogger<LogService> _logger;
         private readonly IMongoCollection<Log> _logCollection;
 
-
         public LogService(ILogger<LogService> logger, ILogDatabaseSettings logDatabaseSettings)
         {
             var client = new MongoClient(logDatabaseSettings.ConnectionString);
@@ -19,6 +18,7 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
             _logCollection = database.GetCollection<Log>(logDatabaseSettings.LogCollectionName);
             _logger = logger;
         }
+
         public async Task CreateLog(LogDto logDto)
         {
             Log log = logDto.ToMap<Log>();
@@ -37,7 +37,6 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
                     $"Source: {exception.Source} {Environment.NewLine}" +
                     $"Stack Tree: {exception.StackTrace}");
             }
-
         }
     }
 }

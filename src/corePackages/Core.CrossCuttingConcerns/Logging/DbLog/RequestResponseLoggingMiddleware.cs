@@ -4,7 +4,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IO;
-using System.Net;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -37,7 +36,6 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
             log = await LogRequest(context, log);
             log = await LogResponse(context, log);
             _ = logService.CreateLog(log);
-
         }
 
         private async Task<LogDto> LogRequest(HttpContext context, LogDto log)
@@ -59,7 +57,6 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
             }
             catch (Exception exception)
             {
-
                 log.Exception = JsonSerializer.Serialize(exception);
                 log.ExceptionMessage = JsonSerializer.Serialize(exception.Message);
                 if (exception.InnerException != null)
@@ -74,7 +71,6 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
 
         private async Task<LogDto> LogResponse(HttpContext context, LogDto log)
         {
-
             var originalBodyStream = context.Response.Body;
             await using var responseBody = _recyclableMemoryStreamManager.GetStream();
             context.Response.Body = responseBody;
@@ -105,23 +101,26 @@ namespace Core.CrossCuttingConcerns.Logging.DbLog
                         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                         exceptionTitle = "Business Exception";
                         break;
+
                     case NotFoundException n:
                         context.Response.StatusCode = StatusCodes.Status404NotFound;
                         exceptionTitle = "NotFound Exception";
                         break;
+
                     case ValidationException v:
                         context.Response.StatusCode = StatusCodes.Status400BadRequest;
                         exceptionTitle = "Validation Exception";
                         break;
+
                     case AuthorizationException a:
                         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                         exceptionTitle = "Authorization Exception";
                         break;
+
                     default:
                         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                         exceptionTitle = "Default Exception";
                         break;
-
                 }
                 var result = new ProblemDetails
                 {

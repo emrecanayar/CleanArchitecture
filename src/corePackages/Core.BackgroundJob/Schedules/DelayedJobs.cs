@@ -11,7 +11,6 @@ namespace Core.BackgroundJob.Schedules
                  (
                   job => job.Process(userId),
                   TimeSpan.FromSeconds(10));
-
         }
     }
 }

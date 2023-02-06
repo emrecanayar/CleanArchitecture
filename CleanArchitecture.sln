@@ -55,7 +55,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Test", "src\corePackag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Tests", "tests\Application.Tests\Application.Tests.csproj", "{E2AD11C3-FEF2-4DE6-B8FA-13ED7FC27B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.BackgroundJob", "src\corePackages\Core.BackgroundJob\Core.BackgroundJob.csproj", "{A6447E6D-305C-4E63-94C7-799E9C8B9B88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.BackgroundJob", "src\corePackages\Core.BackgroundJob\Core.BackgroundJob.csproj", "{A6447E6D-305C-4E63-94C7-799E9C8B9B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Services", "src\corePackages\Core.Services\Core.Services.csproj", "{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{A6447E6D-305C-4E63-94C7-799E9C8B9B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6447E6D-305C-4E63-94C7-799E9C8B9B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6447E6D-305C-4E63-94C7-799E9C8B9B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +183,7 @@ Global
 		{DA706187-CF95-4E4C-8736-B2D085EA2606} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 		{E2AD11C3-FEF2-4DE6-B8FA-13ED7FC27B69} = {7EB0B6A3-F14C-4C26-ADDB-57A4FA65A849}
 		{A6447E6D-305C-4E63-94C7-799E9C8B9B88} = {A6F89245-A525-4B03-BB93-A05C144A208F}
+		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B08683-DB84-490D-9E07-E40053E7ECDC}
