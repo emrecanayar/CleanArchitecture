@@ -1,5 +1,5 @@
-﻿using Core.Persistence.ComplexTypes;
-using Core.Persistence.Repositories;
+﻿using Core.Domain.ComplexTypes;
+using Core.Domain.Entities.Base;
 
 namespace rentACar.Domain.Entities
 {
@@ -18,7 +18,7 @@ namespace rentACar.Domain.Entities
             Token = token;
             Status = status;
             CreatedBy = createdBy;
-            CreatedDate = createdDate;  
+            CreatedDate = createdDate;
             ModifiedBy = modifiedBy;
             ModifiedDate = modifiedDate;
             IsDeleted = isDeleted;

@@ -1,5 +1,4 @@
-﻿using Core.Persistence.ComplexTypes;
-using Core.Security.Entities;
+﻿using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using rentACar.Persistence.Configurations.Base;

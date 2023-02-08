@@ -4,8 +4,8 @@ using MediatR;
 using rentACar.Application.Features.OperationClaims.Dtos;
 using rentACar.Application.Features.OperationClaims.Rules;
 using rentACar.Application.Services.Repositories;
+using static Core.Domain.Constants.OperationClaims;
 using static rentACar.Application.Features.OperationClaims.Constants.OperationClaims;
-using static rentACar.Domain.Constants.OperationClaims;
 namespace rentACar.Application.Features.OperationClaims.Commands.CreateOperationClaim
 {
     public class CreateOperationClaimCommand : IRequest<CreatedOperationClaimDto>, ISecuredRequest

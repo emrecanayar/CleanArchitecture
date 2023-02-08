@@ -1,11 +1,11 @@
-﻿using Core.Persistence.ComplexTypes;
+﻿using Core.Domain.ComplexTypes;
 
-namespace Core.Persistence.Repositories
+namespace Core.Domain.Entities.Base
 {
     public class Entity
     {
         public int Id { get; set; }
-        public RecordStatu Status { get; set; }
+        public RecordStatu Status { get; set; } = RecordStatu.Active;
         public string CreatedBy { get; set; } = "Admin";
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string ModifiedBy { get; set; }

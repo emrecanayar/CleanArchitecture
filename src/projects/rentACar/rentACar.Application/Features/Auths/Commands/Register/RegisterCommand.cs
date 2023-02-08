@@ -1,5 +1,4 @@
-﻿using Core.BackgroundJob.Schedules;
-using Core.Persistence.ComplexTypes;
+﻿using Core.Domain.ComplexTypes;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Enums;

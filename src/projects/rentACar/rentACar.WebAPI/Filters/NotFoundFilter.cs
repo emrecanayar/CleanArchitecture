@@ -1,4 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
+using Core.Domain.Entities.Base;
 using Core.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;

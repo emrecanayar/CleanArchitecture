@@ -1,14 +1,13 @@
 using Application.Features.Users.Dtos;
 using Application.Features.Users.Rules;
-using rentACar.Application.Services.Repositories;
-using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using MediatR;
-using static Application.Features.Users.Constants.OperationClaims;
-using static rentACar.Domain.Constants.OperationClaims;
 using rentACar.Application.Features;
+using rentACar.Application.Services.Repositories;
+using static Application.Features.Users.Constants.OperationClaims;
+using static Core.Domain.Constants.OperationClaims;
 
 namespace Application.Features.Users.Commands.CreateUser;
 

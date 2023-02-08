@@ -1,4 +1,4 @@
-﻿using Core.Persistence.ComplexTypes;
+﻿using Core.Domain.ComplexTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using rentACar.Domain.Entities;

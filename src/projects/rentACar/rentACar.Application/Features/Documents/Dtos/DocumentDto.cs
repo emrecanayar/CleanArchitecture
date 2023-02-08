@@ -1,4 +1,4 @@
-﻿using Core.Persistence.ComplexTypes;
+﻿using Core.Domain.ComplexTypes;
 
 namespace rentACar.Application.Features.Documents.Dtos
 {

@@ -1,7 +1,7 @@
 ﻿using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
+using Core.Domain.ComplexTypes;
 using Core.Helpers.Helpers;
-using Core.Persistence.ComplexTypes;
 using Core.Persistence.Paging;
 using Core.Security.Constants;
 using rentACar.Application.Features.Documents.Dtos;

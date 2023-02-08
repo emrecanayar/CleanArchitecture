@@ -1,12 +1,12 @@
 using Application.Features.UserOperationClaims.Dtos;
 using Application.Features.UserOperationClaims.Rules;
-using rentACar.Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using MediatR;
+using rentACar.Application.Services.Repositories;
 using static Application.Features.UserOperationClaims.Constants.OperationClaims;
-using static rentACar.Domain.Constants.OperationClaims;
+using static Core.Domain.Constants.OperationClaims;
 
 namespace Application.Features.UserOperationClaims.Commands.UpdateUserOperationClaim;
 

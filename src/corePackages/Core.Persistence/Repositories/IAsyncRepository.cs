@@ -1,4 +1,5 @@
-﻿using Core.Persistence.Paging;
+﻿using Core.Domain.Entities.Base;
+using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 

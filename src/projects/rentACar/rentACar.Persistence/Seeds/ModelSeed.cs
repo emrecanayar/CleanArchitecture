@@ -1,12 +1,7 @@
-﻿using Core.Persistence.ComplexTypes;
+﻿using Core.Domain.ComplexTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using rentACar.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rentACar.Persistence.Seeds
 {

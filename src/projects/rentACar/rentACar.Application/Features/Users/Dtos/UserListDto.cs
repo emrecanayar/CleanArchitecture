@@ -1,4 +1,4 @@
-using Core.Persistence.ComplexTypes;
+using Core.Domain.ComplexTypes;
 
 namespace Application.Features.Users.Dtos;
 
