@@ -1,16 +1,12 @@
-﻿using Core.CrossCuttingConcerns.Exceptions;
+﻿using Core.Application.Rules;
+using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rentACar.Application.Features.Brands.Rules
 {
-    public class BrandBusinessRules
+    public class BrandBusinessRules : BaseBusinessRules
     {
         private readonly IBrandRepository _brandRepository;
 

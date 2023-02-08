@@ -1,10 +1,11 @@
-﻿using rentACar.Application.Services.DocumentService;
+﻿using Core.Application.Rules;
+using rentACar.Application.Services.DocumentService;
 using rentACar.Application.Services.Repositories;
 using rentACar.Domain.Entities;
 
 namespace rentACar.Application.Features.BrandDocuments.Rules
 {
-    public class BrandDocumentBusinessRules
+    public class BrandDocumentBusinessRules : BaseBusinessRules
     {
         private readonly string FILE_FOLDER = Path.Combine("Resources", "Files", "BrandDocuments");
         private readonly IBrandDocumentRepository _brandDocumentRepository;

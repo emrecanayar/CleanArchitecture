@@ -2,30 +2,24 @@
 using Core.Application.Pipelines.Caching.DisturbedCache;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
+using Core.Application.Pipelines.Transaction;
 using Core.Application.Pipelines.Validation;
+using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Logging.DbLog;
-using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
 using Core.CrossCuttingConcerns.Logging.SeriLog;
+using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
 using Core.Integration.Base;
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
+using Core.Mailing;
+using Core.Mailing.MailKitImplementations;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using rentACar.Application.Features.Auths.Rules;
-using rentACar.Application.Features.BrandDocuments.Rules;
-using rentACar.Application.Features.Brands.Rules;
-using rentACar.Application.Features.Documents.Rules;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.DocumentService;
-using System.Reflection;
 using rentACar.Application.Services.UserService;
-using Core.Application.Pipelines.Transaction;
-using Core.Mailing.MailKitImplementations;
-using Core.Mailing;
-using rentACar.Application.Features.OperationClaims.Rules;
-using Application.Features.UserOperationClaims.Rules;
-using Application.Features.Users.Rules;
+using System.Reflection;
 
 namespace rentACar.Application
 {
@@ -36,14 +30,7 @@ namespace rentACar.Application
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
-            services.AddScoped<BrandBusinessRules>();
-            services.AddScoped<DocumentBusinessRules>();
-            services.AddScoped<BrandDocumentBusinessRules>();
-            services.AddScoped<AuthBusinessRules>();
-            services.AddScoped<UserBusinessRules>();
-            services.AddScoped<OperationClaimBusinessRules>();
-            services.AddScoped<UserOperationClaimBusinessRules>();
+            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
@@ -73,6 +60,24 @@ namespace rentACar.Application
 
             return services;
 
+        }
+
+        public static IServiceCollection AddSubClassesOfType(this IServiceCollection services, Assembly assembly, Type type,
+       Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null)
+        {
+            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            foreach (var item in types)
+            {
+                if (addWithLifeCycle == null)
+                {
+                    services.AddScoped(item);
+                }
+                else
+                {
+                    addWithLifeCycle(services, type);
+                }
+            }
+            return services;
         }
     }
 }

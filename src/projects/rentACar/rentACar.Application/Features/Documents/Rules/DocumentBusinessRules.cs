@@ -1,4 +1,5 @@
-﻿using Core.CrossCuttingConcerns.Exceptions;
+﻿using Core.Application.Rules;
+using Core.CrossCuttingConcerns.Exceptions;
 using Core.Helpers.Helpers;
 using Core.Persistence.ComplexTypes;
 using Core.Persistence.Paging;
@@ -10,7 +11,7 @@ using System.Text.Json;
 
 namespace rentACar.Application.Features.Documents.Rules
 {
-    public class DocumentBusinessRules
+    public class DocumentBusinessRules : BaseBusinessRules
     {
         private readonly IDocumentRepository _documentRepository;
 

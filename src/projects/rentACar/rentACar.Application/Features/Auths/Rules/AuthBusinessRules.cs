@@ -1,4 +1,5 @@
-﻿using Core.CrossCuttingConcerns.Exceptions;
+﻿using Core.Application.Rules;
+using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
 using Core.Security.Enums;
 using Core.Security.Hashing;
@@ -7,7 +8,7 @@ using rentACar.Application.Services.Repositories;
 
 namespace rentACar.Application.Features.Auths.Rules
 {
-    public class AuthBusinessRules
+    public class AuthBusinessRules : BaseBusinessRules
     {
         private readonly IUserRepository _userRepository;
 
