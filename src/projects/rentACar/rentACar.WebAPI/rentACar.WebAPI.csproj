@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\corePackages\Core.BackgroundJob\Core.BackgroundJob.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.Utilities\Core.Utilities.csproj" />
     <ProjectReference Include="..\rentACar.Infrastructure\rentACar.Infrastructure.csproj" />
     <ProjectReference Include="..\rentACar.Persistence\rentACar.Persistence.csproj" />
   </ItemGroup>

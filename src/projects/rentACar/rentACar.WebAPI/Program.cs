@@ -1,5 +1,5 @@
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Filters;
 using Core.CrossCuttingConcerns.Logging.DbLog;
@@ -7,6 +7,8 @@ using Core.Security;
 using Core.Security.ApplicationSecurity.Filters;
 using Core.Security.Encryption;
 using Core.Security.JWT;
+using Core.Utilities.Messages;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,12 +17,11 @@ using Prometheus;
 using rentACar.Application;
 using rentACar.Infrastructure;
 using rentACar.Persistence;
+using rentACar.Persistence.Modules;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using rentACar.Persistence.Modules;
-using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,10 +68,11 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.CustomSchemaIds(type => type.ToString());
-    opt.SwaggerDoc("v1", new OpenApiInfo
+    opt.SwaggerDoc(SwaggerMessages.Version, new OpenApiInfo
     {
-        Title = "Clean Architecture Backend",
-        Version = "v1"
+        Title = SwaggerMessages.Title,
+        Version = SwaggerMessages.Version,
+        Description = SwaggerMessages.Description,
     });
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
