@@ -4,11 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.ElasticSearch
 {
@@ -185,6 +180,6 @@ namespace Core.ElasticSearch
             return new ElasticClient(_connectionSettings);
         }
 
-       
+
     }
 }
