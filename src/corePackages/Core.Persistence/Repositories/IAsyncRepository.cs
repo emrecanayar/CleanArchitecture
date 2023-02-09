@@ -23,7 +23,12 @@ namespace Core.Persistence.Repositories
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
 
         Task<T> AddAsync(T entity);
+        Task<List<T>> AddRangeAsync(List<T> entity);
         Task<T> UpdateAsync(T entity);
+        Task<List<T>> UpdateRangeAsync(List<T> entity);
         Task<T> DeleteAsync(T entity);
+        Task<List<T>> DeleteRangeAsync(List<T> entity);
+        Task RemoveAsync(int id);
+        Task RemoveAsync(T entity);
     }
 }

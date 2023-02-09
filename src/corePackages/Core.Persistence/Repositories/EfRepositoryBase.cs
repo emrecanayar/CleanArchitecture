@@ -67,6 +67,12 @@ namespace Core.Persistence.Repositories
             await Context.SaveChangesAsync();
             return entity;
         }
+        public async Task<List<TEntity>> AddRangeAsync(List<TEntity> entityList)
+        {
+            Context.AddRangeAsync(entityList);
+            await Context.SaveChangesAsync();
+            return entityList;
+        }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
@@ -74,8 +80,21 @@ namespace Core.Persistence.Repositories
             await Context.SaveChangesAsync();
             return entity;
         }
+        public async Task<List<TEntity>> UpdateRangeAsync(List<TEntity> entityList)
+        {
+            Context.Entry(entityList).State = EntityState.Modified;
+            await Context.SaveChangesAsync();
+            return entityList;
+        }
 
         public async Task<TEntity> DeleteAsync(TEntity entity)
+        {
+            Context.Entry(entity).State = EntityState.Deleted;
+            await Context.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<List<TEntity>> DeleteRangeAsync(List<TEntity> entity)
         {
             Context.Entry(entity).State = EntityState.Deleted;
             await Context.SaveChangesAsync();
@@ -121,10 +140,23 @@ namespace Core.Persistence.Repositories
             Context.SaveChanges();
             return entity;
         }
+        public List<TEntity> AddRange(List<TEntity> entity)
+        {
+            Context.AddRange(entity);
+            Context.SaveChanges();
+            return entity;
+        }
 
         public TEntity Update(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            Context.SaveChanges();
+            return entity;
+        }
+
+        public List<TEntity> UpdateRange(List<TEntity> entity)
+        {
+            Context.UpdateRange(entity);
             Context.SaveChanges();
             return entity;
         }
@@ -136,9 +168,39 @@ namespace Core.Persistence.Repositories
             return entity;
         }
 
+        public List<TEntity> DeleteRange(List<TEntity> entity)
+        {
+            Context.RemoveRange(entity);
+            Context.SaveChanges();
+            return entity;
+        }
         public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
         {
             return await Context.Set<TEntity>().AnyAsync(expression);
+        }
+
+        public void Remove(int id)
+        {
+            TEntity entity = Context.Set<TEntity>().Find(id);
+            Remove(entity);
+        }
+
+        public void Remove(TEntity entity)
+        {
+            entity.IsDeleted = true;
+            Update(entity);
+        }
+
+        public async Task RemoveAsync(int id)
+        {
+            TEntity entity = Context.Set<TEntity>().Find(id);
+            await RemoveAsync(entity);
+        }
+
+        public async Task RemoveAsync(TEntity entity)
+        {
+            entity.IsDeleted = true;
+            await UpdateAsync(entity);
         }
     }
 }
