@@ -1,7 +1,7 @@
 ﻿using Core.Security.EmailAuthenticator;
 using Core.Security.JWT;
-using Core.Security.OtpAuthenticator.OtpNet;
 using Core.Security.OtpAuthenticator;
+using Core.Security.OtpAuthenticator.OtpNet;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Security
