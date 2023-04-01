@@ -12,7 +12,7 @@ namespace Core.Application.Pipelines.Validation
         {
             _validators = validators;
         }
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
 
             ValidationContext<object> context = new(request);

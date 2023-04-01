@@ -15,7 +15,7 @@ namespace Core.Application.Pipelines.Caching.DisturbedCache
             _cache = cache;
             _logger = logger;
         }
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             TResponse response;
             if (request.BypassCache) return await next();

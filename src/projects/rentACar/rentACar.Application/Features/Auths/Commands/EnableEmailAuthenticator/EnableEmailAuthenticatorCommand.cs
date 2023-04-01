@@ -60,6 +60,11 @@ namespace rentACar.Application.Features.Auths.Commands.EnableEmailAuthenticator
 
                 return Unit.Value;
             }
+
+            Task IRequestHandler<EnableEmailAuthenticatorCommand>.Handle(EnableEmailAuthenticatorCommand request, CancellationToken cancellationToken)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

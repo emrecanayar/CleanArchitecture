@@ -1,5 +1,6 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching.DisturbedCache;
+using Core.Application.Pipelines.Localization;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Transaction;
@@ -13,8 +14,8 @@ using Core.Integration.Dto;
 using Core.Integration.Serialization;
 using Core.Mailing;
 using Core.Mailing.MailKitImplementations;
+using Core.Persistence.Repositories;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using rentACar.Application.Services.AuthService;
 using rentACar.Application.Services.DocumentService;
@@ -29,11 +30,12 @@ namespace rentACar.Application
         {
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
 
             services.AddScoped<ApiSession>();
             services.AddScoped<IJsonSerializer, JsonSerializer>();
+            services.AddSingleton<CustomStringLocalizer>();
 
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
@@ -49,14 +51,19 @@ namespace rentACar.Application
                 options.Configuration = "localhost:6379";
             });
 
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionScopeBehavior<,>));
+            services.AddMediatR(configuration =>
+            {
+                configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+                configuration.AddOpenBehavior(typeof(LocalizationBehavior<,>));
+                configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));
+                configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+
+            });
 
             return services;
 

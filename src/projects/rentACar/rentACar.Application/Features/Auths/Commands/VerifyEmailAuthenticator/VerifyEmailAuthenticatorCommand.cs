@@ -32,6 +32,11 @@ namespace rentACar.Application.Features.Auths.Commands.VerifyEmailAuthenticator
 
                 return Unit.Value;
             }
+
+            Task IRequestHandler<VerifyEmailAuthenticatorCommand>.Handle(VerifyEmailAuthenticatorCommand request, CancellationToken cancellationToken)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

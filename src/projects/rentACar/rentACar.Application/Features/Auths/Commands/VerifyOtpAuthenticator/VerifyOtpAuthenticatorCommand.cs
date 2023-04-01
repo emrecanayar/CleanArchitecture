@@ -42,6 +42,11 @@ namespace rentACar.Application.Features.Auths.Commands.VerifyOtpAuthenticator
 
                 return Unit.Value;
             }
+
+            Task IRequestHandler<VerifyOtpAuthenticatorCommand>.Handle(VerifyOtpAuthenticatorCommand request, CancellationToken cancellationToken)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Core.Application.Pipelines.Caching.InMemoryCache
             _cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>();
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             TResponse response;
             if (request.BypassCache) return await next();

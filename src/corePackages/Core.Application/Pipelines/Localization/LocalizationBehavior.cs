@@ -15,7 +15,7 @@ namespace Core.Application.Pipelines.Localization
             _localizer = localizer;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             string userLang = _httpContextAccessor.HttpContext.Request.Headers["Accept-Language"].ToString();
 

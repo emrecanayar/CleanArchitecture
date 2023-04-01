@@ -14,7 +14,7 @@ namespace Core.Application.Pipelines.Authorization
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
