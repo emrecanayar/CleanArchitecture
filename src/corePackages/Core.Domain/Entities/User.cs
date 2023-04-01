@@ -1,8 +1,8 @@
 ﻿
 using Core.Domain.Entities.Base;
-using Core.Security.Enums;
+using Core.Domain.Enums;
 
-namespace Core.Security.Entities
+namespace Core.Domain.Entities
 {
     public class User : Entity
     {

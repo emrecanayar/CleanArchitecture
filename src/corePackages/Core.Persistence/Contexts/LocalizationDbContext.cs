@@ -1,8 +1,7 @@
 ﻿using Core.Domain.Entities;
-using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Application.Pipelines.Localization.Contexts
+namespace Core.Persistence.Contexts
 {
     public class LocalizationDbContext : DbContext
     {

@@ -1,23 +1,23 @@
 ﻿using Core.Domain.Entities.Base;
 
-namespace Core.Security.Entities
+namespace Core.Domain.Entities
 {
-    public class OtpAuthenticator : Entity
+    public class EmailAuthenticator : Entity
     {
         public int UserId { get; set; }
-        public byte[] SecretKey { get; set; }
+        public string? ActivationKey { get; set; }
         public bool IsVerified { get; set; }
         public virtual User User { get; set; }
 
-        public OtpAuthenticator()
+        public EmailAuthenticator()
         {
         }
 
-        public OtpAuthenticator(int id, int userId, byte[] secretKey, bool isVerified) : this()
+        public EmailAuthenticator(int id, int userId, string? activationKey, bool isVerified) : this()
         {
             Id = id;
             UserId = userId;
-            SecretKey = secretKey;
+            ActivationKey = activationKey;
             IsVerified = isVerified;
         }
     }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core.Persistence.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
@@ -13,6 +14,7 @@ namespace Core.Application.Pipelines.Localization
             _httpContextAccessor = httpContextAccessor;
             _localizer = localizer;
         }
+
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             string userLang = _httpContextAccessor.HttpContext.Request.Headers["Accept-Language"].ToString();

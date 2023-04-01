@@ -1,4 +1,4 @@
-﻿namespace scanAndGo.Application.Features.Languages.Dtos
+﻿namespace Core.Domain.Dtos
 {
     public class LanguageDto
     {

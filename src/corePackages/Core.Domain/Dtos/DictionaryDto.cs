@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Dtos
+﻿namespace Core.Domain.Dtos
 {
     public class DictionaryDto
     {

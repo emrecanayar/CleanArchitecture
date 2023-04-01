@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Core.Application.Pipelines.Localization.Constants
+namespace Core.Persistence.Constants
 {
     public static class LocalizationConnectionString
     {
