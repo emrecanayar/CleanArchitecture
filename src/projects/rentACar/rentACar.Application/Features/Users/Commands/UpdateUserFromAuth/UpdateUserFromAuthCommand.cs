@@ -1,11 +1,11 @@
 ﻿using Application.Features.Users.Dtos;
 using Application.Features.Users.Rules;
-using rentACar.Application.Services.AuthService;
-using rentACar.Application.Services.Repositories;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using Core.Security.Hashing;
 using MediatR;
 using rentACar.Application.Features;
+using rentACar.Application.Services.AuthService;
+using rentACar.Application.Services.Repositories;
 
 namespace Application.Features.Users.Commands.UpdateUserFromAuth;
 

@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Core.Application.Requests;
+﻿using Core.Application.Requests;
+using Core.Domain.Entities;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using MediatR;
 using rentACar.Application.Features.OperationClaims.Models;
 using rentACar.Application.Services.Repositories;

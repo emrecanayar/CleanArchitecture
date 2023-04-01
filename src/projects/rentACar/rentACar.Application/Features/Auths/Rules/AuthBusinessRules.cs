@@ -1,7 +1,7 @@
 ﻿using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
-using Core.Security.Entities;
-using Core.Security.Enums;
+using Core.Domain.Entities;
+using Core.Domain.Enums;
 using Core.Security.Hashing;
 using rentACar.Application.Features.Auths.Constants;
 using rentACar.Application.Services.Repositories;

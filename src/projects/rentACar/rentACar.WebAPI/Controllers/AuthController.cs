@@ -1,7 +1,7 @@
 ﻿using Core.Application.ResponseTypes.Concrete;
 using Core.BackgroundJob.Schedules;
+using Core.Domain.Entities;
 using Core.Security.Dtos;
-using Core.Security.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using rentACar.Application.Features.Auths.Commands.EnableEmailAuthenticator;

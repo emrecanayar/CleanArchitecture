@@ -1,4 +1,4 @@
-﻿using Core.Security.Entities;
+﻿using Core.Domain.Entities;
 using MediatR;
 using rentACar.Application.Features.Auths.Dtos;
 using rentACar.Application.Features.Auths.Rules;

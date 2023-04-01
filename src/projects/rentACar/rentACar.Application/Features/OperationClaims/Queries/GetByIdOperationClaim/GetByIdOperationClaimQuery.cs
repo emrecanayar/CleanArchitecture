@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using MediatR;
 using rentACar.Application.Features.OperationClaims.Dtos;
 using rentACar.Application.Features.OperationClaims.Rules;

@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Services", "src\corePa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\corePackages\Core.Domain\Core.Domain.csproj", "{371B6645-DCE6-40B8-83D3-8224271D35D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Utilities", "src\corePackages\Core.Utilities\Core.Utilities.csproj", "{DFE7A755-A50F-4046-B530-BC10155227E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "src\corePackages\Core.Utilities\Core.Utilities.csproj", "{DFE7A755-A50F-4046-B530-BC10155227E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

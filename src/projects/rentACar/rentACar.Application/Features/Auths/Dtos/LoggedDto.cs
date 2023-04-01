@@ -1,6 +1,6 @@
 ﻿using Core.Application.ResponseTypes.Concrete;
-using Core.Security.Entities;
-using Core.Security.Enums;
+using Core.Domain.Entities;
+using Core.Domain.Enums;
 using Core.Security.JWT;
 using System.Net;
 

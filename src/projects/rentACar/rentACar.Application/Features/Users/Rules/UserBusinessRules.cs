@@ -1,9 +1,9 @@
-using rentACar.Application.Features.Auths.Constants;
-using rentACar.Application.Services.Repositories;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using Core.Security.Hashing;
+using rentACar.Application.Features.Auths.Constants;
+using rentACar.Application.Services.Repositories;
 
 namespace Application.Features.Users.Rules;
 

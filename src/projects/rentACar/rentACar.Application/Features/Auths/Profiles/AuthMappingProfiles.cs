@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using rentACar.Application.Features.Auths.Dtos;
 
 namespace rentACar.Application.Features.Auths.Profiles

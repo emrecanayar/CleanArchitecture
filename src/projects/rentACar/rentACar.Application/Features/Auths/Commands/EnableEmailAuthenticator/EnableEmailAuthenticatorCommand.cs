@@ -1,6 +1,6 @@
-﻿using Core.Mailing;
-using Core.Security.Entities;
-using Core.Security.Enums;
+﻿using Core.Domain.Entities;
+using Core.Domain.Enums;
+using Core.Mailing;
 using MediatR;
 using MimeKit;
 using rentACar.Application.Features.Auths.Rules;

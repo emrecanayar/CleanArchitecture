@@ -1,8 +1,8 @@
 using Application.Features.UserOperationClaims.Constants;
-using rentACar.Application.Services.Repositories;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
-using Core.Security.Entities;
+using Core.Domain.Entities;
+using rentACar.Application.Services.Repositories;
 
 namespace Application.Features.UserOperationClaims.Rules;
 

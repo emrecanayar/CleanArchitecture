@@ -1,11 +1,10 @@
 using Application.Features.Users.Models;
-using rentACar.Application.Services.Repositories;
-using AutoMapper;
 using Core.Application.Requests;
+using Core.Domain.Entities;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using MediatR;
 using rentACar.Application.Features;
+using rentACar.Application.Services.Repositories;
 
 namespace Application.Features.Users.Queries.GetListUser;
 

@@ -1,4 +1,4 @@
-﻿using Core.Security.Entities;
+﻿using Core.Domain.Entities;
 using rentACar.Application.Services.Repositories;
 
 namespace rentACar.Application.Services.UserService

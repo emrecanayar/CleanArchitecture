@@ -1,7 +1,7 @@
 ﻿using Core.Application.ResponseTypes.Concrete;
+using Core.Domain.Entities;
+using Core.Domain.Enums;
 using Core.Security.Dtos;
-using Core.Security.Entities;
-using Core.Security.Enums;
 using Core.Security.JWT;
 using MediatR;
 using rentACar.Application.Features.Auths.Dtos;

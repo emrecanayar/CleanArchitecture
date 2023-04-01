@@ -1,7 +1,7 @@
 using Application.Features.Users.Dtos;
 using Application.Features.Users.Rules;
 using Core.Application.Pipelines.Authorization;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using MediatR;
 using rentACar.Application.Features;
 using rentACar.Application.Services.Repositories;

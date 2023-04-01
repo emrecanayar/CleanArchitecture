@@ -1,7 +1,7 @@
 ﻿using Core.Domain.ComplexTypes;
+using Core.Domain.Entities;
+using Core.Domain.Enums;
 using Core.Security.Dtos;
-using Core.Security.Entities;
-using Core.Security.Enums;
 using Core.Security.Hashing;
 using Core.Security.JWT;
 using MediatR;
@@ -46,7 +46,7 @@ namespace rentACar.Application.Features.Auths.Commands.Register
                     LastName = request.UserForRegister.LastName,
                     Status = RecordStatu.Active,
                     AuthenticatorType = AuthenticatorType.None,
-                    CultureType = CultureType.Tr
+                    CultureType = CultureType.TR
                 };
 
                 User createdUser = await _userRepository.AddAsync(newUser);

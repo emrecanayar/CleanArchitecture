@@ -2,7 +2,7 @@ using Application.Features.UserOperationClaims.Dtos;
 using Application.Features.UserOperationClaims.Rules;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using MediatR;
 using rentACar.Application.Features;
 using rentACar.Application.Services.Repositories;

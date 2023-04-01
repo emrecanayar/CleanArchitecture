@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Core.Domain.Entities;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
 using rentACar.Application.Features.OperationClaims.Commands.CreateOperationClaim;
 using rentACar.Application.Features.OperationClaims.Commands.DeleteOperationClaim;
 using rentACar.Application.Features.OperationClaims.Commands.UpdateOperationClaim;

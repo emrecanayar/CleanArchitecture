@@ -1,5 +1,5 @@
-﻿using Core.Security.Entities;
-using Core.Security.Enums;
+﻿using Core.Domain.Entities;
+using Core.Domain.Enums;
 using MediatR;
 using rentACar.Application.Features.Auths.Rules;
 using rentACar.Application.Services.AuthService;

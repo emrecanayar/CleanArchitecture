@@ -1,6 +1,6 @@
 ﻿using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
-using Core.Security.Entities;
+using Core.Domain.Entities;
 using rentACar.Application.Features.OperationClaims.Constants;
 using rentACar.Application.Services.Repositories;
 
