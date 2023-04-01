@@ -9,6 +9,7 @@ using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Logging.DbLog;
 using Core.CrossCuttingConcerns.Logging.SeriLog;
 using Core.CrossCuttingConcerns.Logging.SeriLog.Logger;
+using Core.Helpers.Extensions;
 using Core.Integration.Base;
 using Core.Integration.Dto;
 using Core.Integration.Serialization;
@@ -18,8 +19,6 @@ using Core.Persistence.Repositories;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using rentACar.Application.Services.AuthService;
-using rentACar.Application.Services.DocumentService;
-using rentACar.Application.Services.UserService;
 using System.Reflection;
 
 namespace rentACar.Application
@@ -39,10 +38,8 @@ namespace rentACar.Application
 
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
-            services.AddScoped<IAuthService, AuthManager>();
-            services.AddScoped<IDocumentService, DocumentManager>();
-            services.AddScoped<IUserService, UserManager>();
 
+            services.AddScopedWithManagers(typeof(IAuthService).Assembly);
             services.AddSingleton<LoggerServiceBase, FileLogger>();
             services.AddSingleton<IMailService, MailKitMailService>();
 
@@ -84,6 +81,25 @@ namespace rentACar.Application
                     addWithLifeCycle(services, type);
                 }
             }
+            return services;
+        }
+
+        public static IServiceCollection AddScopedWithManagers(this IServiceCollection services, Assembly assembly)
+        {
+            var serviceTypes = assembly.GetTypes()
+                                       .Where(t => t.IsInterface && t.Name.EndsWith("Service"));
+
+            foreach (var serviceType in serviceTypes)
+            {
+                var managerTypeName = serviceType.Name.Replace("Service", "Manager").ReplaceFirst("I", "");
+                var managerType = assembly.GetTypes().SingleOrDefault(t => t.Name == managerTypeName);
+
+                if (managerType != null)
+                {
+                    services.AddScoped(serviceType, managerType);
+                }
+            }
+
             return services;
         }
     }
