@@ -1,4 +1,7 @@
-﻿using System.Linq.Dynamic.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace Core.Persistence.Dynamic
@@ -27,6 +30,16 @@ namespace Core.Persistence.Dynamic
             if (dynamic.Filter is not null) query = Filter(query, dynamic.Filter);
             if (dynamic.Sort is not null && dynamic.Sort.Any()) query = Sort(query, dynamic.Sort);
             return query;
+        }
+
+        public static IQueryable<T> CustomInclude<T>(this IQueryable<T> query, LambdaExpression includeExpression)
+        {
+            var method = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .FirstOrDefault(m => m.Name == nameof(EntityFrameworkQueryableExtensions.Include) && m.GetParameters().Length == 2)
+                .MakeGenericMethod(typeof(T), includeExpression.ReturnType);
+
+            return (IQueryable<T>)method.Invoke(null, new object[] { query, includeExpression });
         }
 
         private static IQueryable<T> Filter<T>(IQueryable<T> queryable, Filter filter)
