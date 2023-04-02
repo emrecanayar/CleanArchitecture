@@ -25,7 +25,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Base\Commands\" />
 	  <Folder Include="Base\Profiles\" />
 	</ItemGroup>
 
