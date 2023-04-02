@@ -24,4 +24,9 @@
 		<ProjectReference Include="..\Core.Security\Core.Security.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Base\Commands\" />
+	  <Folder Include="Base\Profiles\" />
+	</ItemGroup>
+
 </Project>
