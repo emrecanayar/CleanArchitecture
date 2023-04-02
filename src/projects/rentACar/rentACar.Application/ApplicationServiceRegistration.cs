@@ -1,5 +1,6 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching.DisturbedCache;
+using Core.Application.Pipelines.CheckId;
 using Core.Application.Pipelines.DbLogging;
 using Core.Application.Pipelines.Localization;
 using Core.Application.Pipelines.Logging;
@@ -60,6 +61,7 @@ namespace rentACar.Application
                 configuration.AddOpenBehavior(typeof(LocalizationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));
                 configuration.AddOpenBehavior(typeof(DbLoggingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CheckIdBehavior<,>));
                 configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
 
             });

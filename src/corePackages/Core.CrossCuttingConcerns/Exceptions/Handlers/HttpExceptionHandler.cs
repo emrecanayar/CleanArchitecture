@@ -49,5 +49,12 @@ namespace Core.CrossCuttingConcerns.Exceptions.Handlers
             string details = new InternalServerErrorProblemDetails(exception.Message).AsJson();
             return Response.WriteAsync(details);
         }
+
+        protected override Task HandleException(BadRequestException badRequestException)
+        {
+            Response.StatusCode = StatusCodes.Status400BadRequest;
+            string details = new BusinessProblemDetails(badRequestException.Message).AsJson();
+            return Response.WriteAsync(details);
+        }
     }
 }

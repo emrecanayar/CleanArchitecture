@@ -9,6 +9,9 @@ namespace Core.CrossCuttingConcerns.Exceptions.Handlers
             if (exception is BusinessException businessException)
                 return HandleException(businessException);
 
+            else if (exception is BadRequestException badRequestException)
+                return HandleException(badRequestException);
+
             else if (exception is ValidationException validationException)
                 return HandleException(validationException);
 
@@ -22,6 +25,7 @@ namespace Core.CrossCuttingConcerns.Exceptions.Handlers
         }
 
         protected abstract Task HandleException(BusinessException businessException);
+        protected abstract Task HandleException(BadRequestException badRequestException);
         protected abstract Task HandleException(ValidationException validationException);
         protected abstract Task HandleException(AuthorizationException authorizationException);
         protected abstract Task HandleException(NotFoundException notFoundException);
