@@ -1,4 +1,4 @@
-﻿namespace Core.CrossCuttingConcerns.Logging.DbLog
+﻿namespace Core.CrossCuttingConcerns.Logging.DbLog.Mongo
 {
     public class LogDatabaseSettings : ILogDatabaseSettings
     {

@@ -1,5 +1,6 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching.DisturbedCache;
+using Core.Application.Pipelines.DbLogging;
 using Core.Application.Pipelines.Localization;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
@@ -36,7 +37,7 @@ namespace rentACar.Application
             services.AddScoped<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<CustomStringLocalizer>();
 
-            services.AddScoped<ILogService, LogService>();
+            services.AddScoped<Logging>();
             services.AddScoped<IBaseRestClient, BaseRestClient>();
 
             services.AddScopedWithManagers(typeof(IAuthService).Assembly);
@@ -58,6 +59,7 @@ namespace rentACar.Application
                 configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(LocalizationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));
+                configuration.AddOpenBehavior(typeof(DbLoggingBehavior<,>));
                 configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
 
             });

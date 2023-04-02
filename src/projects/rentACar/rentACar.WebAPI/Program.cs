@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Filters;
 using Core.CrossCuttingConcerns.Logging.DbLog;
+using Core.CrossCuttingConcerns.Logging.DbLog.Mongo;
 using Core.Security;
 using Core.Security.ApplicationSecurity.Filters;
 using Core.Security.Encryption;

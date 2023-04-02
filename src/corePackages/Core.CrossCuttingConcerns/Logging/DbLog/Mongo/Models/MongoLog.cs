@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Core.CrossCuttingConcerns.Logging.DbLog.Models
+namespace Core.CrossCuttingConcerns.Logging.DbLog.Mongo.Models
 {
-    public class Log
+    public class MongoLog
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
