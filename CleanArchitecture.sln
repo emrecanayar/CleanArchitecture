@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "src\coreP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Timing", "src\corePackages\Core.Timing\Core.Timing.csproj", "{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Json", "src\corePackages\Core.Json\Core.Json.csproj", "{D59C48F9-8D38-4BC9-BA54-2DE15521AC14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59C48F9-8D38-4BC9-BA54-2DE15521AC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59C48F9-8D38-4BC9-BA54-2DE15521AC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59C48F9-8D38-4BC9-BA54-2DE15521AC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59C48F9-8D38-4BC9-BA54-2DE15521AC14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +211,7 @@ Global
 		{371B6645-DCE6-40B8-83D3-8224271D35D0} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 		{DFE7A755-A50F-4046-B530-BC10155227E9} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE} = {A6F89245-A525-4B03-BB93-A05C144A208F}
+		{D59C48F9-8D38-4BC9-BA54-2DE15521AC14} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B08683-DB84-490D-9E07-E40053E7ECDC}
