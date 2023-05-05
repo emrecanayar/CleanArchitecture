@@ -1,16 +1,17 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-#Build Stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal As build
-WORKDIR /source
-COPY . .
-RUN dotnet restore rentACar.WebAPI.csproj --disable-parallel
-RUN dotnet publish rentACar.WebAPI.csproj -c release -o out
-
-#Serve Stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal
+# Base image
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
-COPY --from=build /app ./
 
-EXPOSE 5252
-ENTRYPOINT ["dotnet", "rentACar.WebAPI.dll"]
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o /app
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=build-env /app .
+ENTRYPOINT ["dotnet", "RentACar.WebAPI.dll"]
