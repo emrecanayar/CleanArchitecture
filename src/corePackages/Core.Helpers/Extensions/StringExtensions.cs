@@ -77,5 +77,10 @@
 
             return input.Substring(0, maxLength);
         }
+
+        public static bool IsNullOrEmpty(this string str)
+        {
+            return string.IsNullOrEmpty(str);
+        }
     }
 }

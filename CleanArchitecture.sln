@@ -63,6 +63,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\corePack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "src\corePackages\Core.Utilities\Core.Utilities.csproj", "{DFE7A755-A50F-4046-B530-BC10155227E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Timing", "src\corePackages\Core.Timing\Core.Timing.csproj", "{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{DFE7A755-A50F-4046-B530-BC10155227E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFE7A755-A50F-4046-B530-BC10155227E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFE7A755-A50F-4046-B530-BC10155227E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +204,7 @@ Global
 		{83CDB116-30BD-44F2-AC3E-F7BFB934A2F9} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 		{371B6645-DCE6-40B8-83D3-8224271D35D0} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 		{DFE7A755-A50F-4046-B530-BC10155227E9} = {A6F89245-A525-4B03-BB93-A05C144A208F}
+		{B45FCC98-30DD-40D7-BC90-AA9F2FFAA6FE} = {A6F89245-A525-4B03-BB93-A05C144A208F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B08683-DB84-490D-9E07-E40053E7ECDC}
